@@ -1,0 +1,12 @@
+<html>
+<head>
+<title>QUILF -Least Squares </title>
+</head>
+<body>
+<h3><a name="lsq">Least Squares</a></h3>
+
+<p>F2-LSQ uses least-squares to get the "best" values of the variables.  When this mode is invoked (by pressing F2 or selecting LSQ-start from the menu), the program searches the file QUILF.RCT (Appendix 1) to find all the reactions that are possible among the phases listed and that can affect the value of one or more of the variables being refined.  In almost all cases the number of possible reactions used exceeds the number of independent reactions.  Once these have been identified, and may displayed from the Reactions menu, the program then performs the least-squares calculations and displays the results in the column labelled "Calc".  It is easy to compare the initial and model results.  Next is a column labelled "Uncer"; this is not a statistical uncertainty, but rather an expression of the amount by which the input variables would have to change to permit an exact solution - one that would precisely satisfy all the equilibria.  Unless the program finds an exact solution (defined as the residuals for all reactions being less than 0.1%), the reactions that "failed" and their residuals may be displayed in the Test Reactions window (and in the text-file or printer if ECHO has been activated).  The tolerance of 0.1% is necessary in only a few cases, and it is quite possible to obtain a very good solution even if all the reactions are listed as "failed".  For example, a residual of 500 J corresponds to an error of approximately 10 degrees - well within the uncertainties of the models - for the FeTi (Fe<sup>2+</sup>Ti<sup>4+</sup>Fe<sup>3+</sup>-2) reaction.</p>
+
+
+</body>
+</html>

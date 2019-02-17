@@ -1,0 +1,1031 @@
+<html>
+<head>
+<title>QUILF</title>
+</head>
+<body>
+
+<h1><a name="titlepage">QUILF:</a> A program to assess equilibria among Fe-Mg-Ti Oxides, Pyroxenes, Olivine, and Quartz</h1>
+<br>
+<center>By</center>
+<br>
+<center>David J. Andersen</center>
+<center>quilf@yahoo.com</center>
+<br>
+<center>Donald H. Lindsley1 and Paula M. Davidson</center>
+<center>Department of Earth and Space Sciences</center>
+<center>State University of New York</center>
+<center>Stony Brook, NY 11794-2100</center>
+<br>
+        1 To whom correspondence and reprint requests should be addressed
+
+<a name="contents">Contents</a>
+
+<ul>
+<li><a href="#titlepage">Title</a></li>
+<li><a href="#contents">Contents</a></li>
+<li><a href="#abstract">Abstract</a></li>
+<li><a href="#backgroundmenu">Background</a></li>
+</ul>
+<a href="#applicationmenu">Application of QUILF</a>
+<ul>
+<li><a href="#main">Main Program</a></li>
+<li><a href="#enteringdatamenu">Entering Data</a></li>
+<li><a href="#executingmenu">Running the program</a></li>
+<li><a href="#caveats">Some Caveats</a></li>
+</ul>
+<a href="#workedexmenu">Examples</a>
+
+<ul>
+<li><a href="#acknow">Acknoweldgements</a></li>
+<li><a href="#references">References</a></li>
+<li><a href="#appendix1">List of Reactions</a></li>
+<li><a href="#definitions">Definitions and Limits</a></li>
+<li><a href="#errormessages">Error Messages</a></li>
+<li><a href="#menus">Menus</a></li>
+<li><a href="#whatsnew">Whats New</a></li>
+</ul>
+<a name="background">Background</a>
+<ul>
+<li><a href="#background">QUILF Equilibria</a></li>
+<li><a href="#effectsmgca">Effects of MgO and CaO</a></li>
+<li><a href="#solutionmodels">Solution models</a></li>
+</ul>
+#Application of QUILF
+<ul>
+<li><a href="#application">Application</a></li>
+<li><a href="#sex1">Adirondack</a></li>
+<li><a href="#ex2">Skaergaard</a></li>
+</ul>
+#Entering Data
+<ul>
+<li><a href="#enteringdata">Entering Data</a></li>
+<li><a href="#editing">Editing</a></li>
+<li><a href="#projections">Projections</a></li>
+<li><a href="#olwtpt">Olivine Weight Percent</a></li>
+<li><a href="#pxwtpt">Pyroxene Weight Percent</a></li>
+<li><a href="#ilwtpt">Ilmenite Weight Percent</a></li>
+<li><a href="#spwtpt">Spinel Weight Percent</a></li>
+</ul>
+#Running the program
+<ul>
+<li><a href="#executing">Executing the program</a></li>
+<li><a href="#lsq">Least squares</a></li>
+<li><a href="#subset">Reaction Subsets</a></li>
+<li><a href="#activities">Activities</a></li>
+<li><a href="#options">Options</a></li>
+</ul>
+#Examples
+<ul>
+<li><a href="#workedex">Some Worked Examples</a></li>
+<li><a href="#twooxide">Two-Oxides</a></li>
+<li><a href="#effectsmgo">Effects of MgO</a></li>
+<li><a href="#bishoptuff">Pyroxene Equilibria</a></li>
+<li><a href="#putting">Putting it all together</a></li>
+</ul>
+
+
+<h2><a name="abstract">ABSTRACT</a></h2>
+
+<p>Program QUILF assesses equilibria among Ti-magnetite, ilmenite, augite, pigeonite, orthopyroxene, olivine, and quartz (or sub-assemblages thereof).  Depending on the assemblage, it can provide information on temperature, pressure, oxygen fugacity, and the activities of SiO<sub>2</sub>, TiO<sub>2</sub>, and Feo at which the phases were last in equilibrium.  For many low-variance assemblages, the system is overdetermined; thus quantitative information can be extracted even if one phase is altered or has re-equilibrated.  QUIlF equilibria commonly reduce the uncertainties in temperature and oxygen fugacity as determined from coexisting ilmenite and Ti-magnetite alone.</p>
+<p>Versions of  QUILF have been written in the DOS, Windows and OS/2 operating environments.  The compositions of the phases must first be projected into seven-component space (CaO-MgO-MnO-FeO-Fe<sub>2</sub>O<sub>3</sub>-TiO<sub>2</sub>-SiO<sub>2</sub>) before they are used in program QUILF; routines to accomplish this are included in the program. </p>
+
+
+
+
+<h3><a name="background">BACKGROUND</a></h3>
+
+<h4><a name="quilf">The QUIlF Equilibrium</a></h4>
+
+<p>Reaction between Fe-Ti oxides (Ti-magnetite and ilmenite solid solution) and ferromagnesian silicates can be expressed by the equilibrium:</p>
+<center>
+<table>
+<tr><td>SiO<sub>2</sub></td><td>+</td><td>2Fe<sub>2</sub>TiO<sub>4</sub></td><td>=</td><td>2FeTiO<sub>3</sub></td><td>+ </td><td>Fe<sub>2</sub>SiO<sub>4</sub></td><td>(1)</td></tr>
+<tr><td>Quartz</td><td>&nbsp;</td><td>Ulvospinel</td><td>&nbsp;</td><td> Ilmenite</td><td>&nbsp;</td><td> Fayalite</td><td>&nbsp;</td></tr>
+</table>
+</center>
+<p>which we abbreviate QUIlF (Frost et al., 1988).  Equilibrium (1) strictly involves only endmember (ferric- and Mg-free) phases, but as magnetite (Fe3O<sub>4</sub>) and hematite (Fe<sub>2</sub>O<sub>3</sub>) components are added to the oxides, the equilibrium is displaced to higher values of oxygen fugacity (fO<sub>2</sub>).  The displaced equilibrium can be expressed by four equilibria in addition to equilibrium (1):</p>
+<center>     			6 Fe<sub>2</sub>O<sub>3</sub> = 4 Fe3O<sub>4</sub> + O<sub>2</sub>                  	       (2) </center>
+<center>                     		2 Fe3O<sub>4</sub> + 3 SiO<sub>2</sub> = 3 Fe<sub>2</sub>SiO<sub>4</sub> + O<sub>2</sub>                (3) </center>
+<center>                    		2 Fe<sub>2</sub>O<sub>3</sub> + 2 SiO<sub>2</sub> = 2 Fe<sub>2</sub>SiO<sub>4</sub> + O<sub>2</sub>                (4) </center>
+and
+<center>                      		Fe<sub>2</sub>TiO<sub>4</sub> + Fe<sub>2</sub>O<sub>3</sub> = Fe3O<sub>4</sub> + FeTiO<sub>3</sub>                (5) </center>
+<p>Equilibria (2) and (3) are, respectively, the magnetite-hematite [MH] and fayalite-magnetite-quartz [FMQ] oxygen buffers; (4) is the (metastable) fayalite-hematite-quartz equilibrium; and (5) governs the exchange of Fe<sup>2+</sup> plus Ti with 2 Fe<sup>3+</sup> [Fe<sup>2+</sup>Ti Fe<sup>3+</sup>-2 exchange vector] between Ti-magnetite and ilmenite.  These equilibria are not all independent [(4) can be obtained by adding 2 to twice (3), and twice (5) results from adding (4) to (1) and then subtracting (3)], but each can be calibrated and used to extract useful information from assemblages of two oxides + fayalite + quartz.  As Frost et al. (1988) pointed out, one use of the QUIlF equilibrium is to place much tighter constraints on temperature and oxygen fugacity than could be determined from the oxides alone (e.g., Andersen and Lindsley, 1988).  Because the QUIlF assemblage is overdetermined, equilibria (1) - (5) can be used to "see through" the effects of later alteration (such as oxidation of Ti-magnetite), or to calculate the activity of a phase that is missing from the assemblage.</p>
+
+
+
+
+<h3><a name="effectsmgca">Effects of Mg</a></h3>
+
+<p>Relatively few rocks contain pure fayalite, however;  usually the fayalite contains some Mg (forsterite component).  As Mg content increases, the oxides become Mg-bearing, and eventually olivine can no longer coexist with quartz; orthopyroxene (Opx) becomes stable and can coexist with the oxides and either olivine or quartz.  Opx-QUIlF equilibria greatly extend the range of rocks to which the system can be applied (Lindsley et al., 1990), but an even greater set of rocks contains calcic pyroxene.  This paper describes the derivation and use of the program QUILF to assess these equilibria.  The program can be used to determine temperature and fO<sub>2</sub> from coexisting oxides; to determine pressure and temperature for pyroxene+olivine+quartz assemblages; to perform calculations on Mg-free QUIlF assemblages; to extract information for Opx-QUIlF, and to assess Ca-pyroxene QUIlF.  Thus it should have a broad range of applications.  [Once quartz and olivine are no longer stable together, the QUIlF equilibrium is no longer applicable in the strict sense.  We have chosen to retain the term QUIlF both to emphasize its importance in deriving the pyroxene-bearing equilibria and to help limit the proliferation of acronyms.]</p>
+
+
+
+
+<h2><a name="solutionmodels">Solution Models</a></h2>
+
+<p>We have calibrated Ca-pyroxene QUIlF by combining equilibria for coexisting Fe-Mg-Mn-Ti oxides and olivine (Andersen, 1988; Andersen et al., 1991) with a solution model for coexisting Ca-Mg-Fe pyroxenes and olivines plus quartz (Davidson and Lindsley, 1989).  The solution models that we use are not unique; other models can be adapted if one wishes to do so; however, it is absolutely essential that the models used be mutually consistent.  Thus Sack and Ghiorso (1989; 1990; Ghiorso and Sack, 1989; Ghiorso, 1990) have derived solution models for coexisting oxides, olivine, orthopyroxene, and quartz.  Like our own, their models are internally consistent, but the two approaches are mutually incompatible.  There are several reasons for this incompatibility, but the major one is that the oxide and silicate equilibria are linked by the solution models for olivine.  Sack and Ghiorso use their olivine model (1989), which is nearly three times as non-ideal as the olivine model of Davidson and Mukhopadhyay (1984) that we use.  It is not our purpose here to argue that one olivine model is "right" and the other "wrong", but rather to emphasize that they - and thus any other solution models derived using them - are mutually incompatible.  For example, it would be a serious mistake to try to combine, say, our pyroxene model with the Sack-Ghiorso oxide models.  When their (Ca-free) models become available, we urge petrologists to apply them in addition to our own.  To our knowledge, however, Sack and Ghiorso have not added Ca-bearing pyroxene and olivine to their system, so for the moment our QUILF program is the only game in town for Ca-bearing assemblages.<p.>
+
+<p>Program QUILF combines thermodynamic solution models for ilmenites (FeTiO<sub>3</sub>-Fe<sub>2</sub>O<sub>3</sub>-MgTiO<sub>3</sub>-MnTiO<sub>3</sub>), spinels (Fe3O<sub>4</sub>-Fe<sub>2</sub>TiO<sub>4</sub>-MgFe<sub>2</sub>O<sub>4</sub>-Mg<sub>2</sub>TiO<sub>4</sub>-MnFe<sub>2</sub>O<sub>3</sub>-MnTiO<sub>4</sub>), clino- and orthopyroxenes (Mg<sub>2</sub>Si<sub>2</sub>O<sub>6</sub>-Fe<sub>2</sub>Si<sub>2</sub>O<sub>6</sub>-CaMgSi<sub>2</sub>O<sub>6</sub>-CaFeSi<sub>2</sub>O<sub>6</sub>) and olivine (Mg<sub>2</sub>SiO<sub>4</sub>-Fe<sub>2</sub>SiO<sub>4</sub>-CaMgSiO<sub>4</sub>-CaFeSiO<sub>4</sub>), as related through equilibria (1) - (5) and the reaction</p>
+<center>Fe<sub>2</sub>SiO<sub>4</sub> + SiO<sub>2</sub> = Fe<sub>2</sub>Si<sub>2</sub>O<sub>6</sub> (6)</center>
+<p>Thus QUIlF involves a portion of the seven-component system Fe-O-MgO-MnO-CaO-TiO<sub>2</sub>-SiO<sub>2</sub> (alternatively, FeO-Fe<sub>2</sub>O<sub>3</sub>-MgO-MnO-CaO-TiO<sub>2</sub>-SiO<sub>2</sub>).  We can be dealing with up to three pyroxenes (augite, pigeonite, Opx), two oxides, quartz, and olivine (two-olivine assemblages have been reported but are extremely rare).  It is possible to have a seven-phase assemblage, although that would be extremely rare in nature.  This assemblage would be univariant in a phase-rule sense, but as we shall see, it would be greatly overdetermined by all the equilibria possible among these phases.  At fixed pressure the assemblage would be (isobarically) invariant, and there would be seven (isobarically) univariant sub-assemblages possible.  [In theory these sub-assemblages would be six-phase but many are compositionally degenerate and thus involve fewer than six phases.]  Thus there would be seven independent reactions among the seven phases.  However, because six of the phases are solid solutions, the total number of equilibria is much greater, owing to constraints on the chemical potentials of the end member components of the solid solutions.  Appendix 1 lists 82 equilibria that we have quantified among these phases [as well as 8 additional equilibria involving rutile (TiO<sub>2</sub>) or metallic iron or both].  Of the 82 equilibria, 11 (which are preceded by ";") are completely redundant and are ignored by the program.  Even though not all of the remaining 71 equilibria are independent, it is very useful to apply all or most of them to our assemblage: some are more sensitive to temperature, some more to pressure; some yield oxygen fugacity or other useful intensive parameters.  The over-determined system permits us to ask whether the phases can have been in equilibrium; whether one or more may have changed in composition after equilibrium had been established; or even whether the solution models may be in error.  The QUILF program is structured so as to help provide the answers.</p>
+
+See also
+<ul>
+<li><a href="#ilmodel">Ilmenite</a></li>
+<li><a href="#spmodel">Spinel</a></li>
+<li><a href="#pxolmodel">Pyroxene and Olivine</a></li>
+</ul>
+
+
+<h3><a name="ilmodel">Ilmenite Solution Model</a></h3>
+
+<p>Ilmenite is treated as a four-component, asymmetric Margules solution with the components being FeTiO<sub>3</sub> (Il), Fe<sub>2</sub>O<sub>3</sub> (Hem), MgTiO<sub>3</sub> (Gk), and MnTiO<sub>3</sub> (Py) (Andersen and Lindsley, 1988; Andersen et al., 1991).</p>
+<br/>
+See also
+<ul>
+<li><a href="#solutionmodels">Solution Models</a></li>
+<li><a href="#spmodel">Spinel</a></li>
+<li><a href="#pxolmodel">Pyroxene and Olivine</a></li>
+</ul>
+
+
+<h3><a name="spmodel">Spinel Solution Model</a></h3>
+
+<p>The spinels are somewhat more complicated, because site occupancies are potentially important.  Andersen et al. presented two formulations for Fe-Mg-Ti spinels - a site-mixing form and a simpler one based on the Akimoto site distribution (which includes Mn) - and found that both worked equally well (1991).  Accordingly, we chose the simpler modified Akimoto model for program QUILF.  The modified Akimoto cation distribution makes the approximation that (1) the spinels are perfectly inverse, (2) Ti always replaces Fe<sup>3+</sup> in the octahedral site, and (3) Fe<sup>2+</sup>, Mg, and Mn<sup>2+</sup> are randomly distributed between the octahedral and tetrahedral sites of the spinel.  Although there are six spinel endmembers (Fe3O<sub>4</sub>, MgFe<sub>2</sub>O<sub>4</sub>, Fe<sub>2</sub>TiO<sub>4</sub>, Mg<sub>2</sub>TiO<sub>4</sub>, MnFe<sub>2</sub>O<sub>4</sub>, and Mn2TiO<sub>4</sub>), these assumptions result in only three independent compositional parameters: NTi (the number of Ti in one four-oxygen formula unit), NMg (the number of Mg per formula unit), and NMn (the number of Mn per formula unit.  Note that NMg and NMn vary from zero to one for Ti-free spinels but can range up to two for the ferric-free join.</p>
+
+See also
+<ul>
+<li><a href="#solutionmodels">Solution Models</a></li>
+<li><a href="#ilmodel">Ilmenite</a></li>
+<li><a href="#pxolmodel">Pyroxene and Olivine</a></li>
+</ul>
+
+
+<h3><a name="pxolmodel">Pyroxene and Olivine Solution Model</a></h3>
+
+<p>Ca-Mg-Fe olivines and pyroxenes each have four nominal endmembers - Mg<sub>2</sub>Si<sub>2</sub>O<sub>6</sub>, Fe<sub>2</sub>Si<sub>2</sub>O<sub>6</sub>, CaMgSi<sub>2</sub>O<sub>6</sub>, and CaFeSi<sub>2</sub>O<sub>6</sub> for pyroxenes, and analogously for olivines.  Variations in bulk composition can be expressed by only two compositional parameters, x ( = XEn) and y ( = XWo).  Based on crystal-chemical constraints, Ca is restricted to the M2 sites.  Mg and Fe then fill the M1 and remaining M2 sites.  Unlike the case for the spinels, however, we do not treat the distribution of Mg and Fe as random over these sites (Davidson and Mukhopadhyay, 1984; Davidson, 1985).  Instead we employ a long-range order parameter t ( = XFeM2 - XFeM1) and calculate site occupancies by minimizing free energy with respect to the order parameter (dG/dt = 0; see Eqn. 3, Davidson and Lindsley, 1989, p. 19).  Because the site occupancies are functions of temperature, it is not possible to solve equilibria involving pyroxenes and/or olivines directly for temperature; instead we use a trial temperature, calculate site occupancies, solve for temperature, and then iterate until temperatures converge.  This feature places important constraints on the QUILF program:  because a trial value is required for temperature, the program requires trial values for all intensive parameters that are to be calculated.  Usually a wild guess is sufficient, but the iterations are more efficient (and, in a few cases, successful only) if the guess is reasonable.</p>
+
+See also
+<ul>
+<li><a href="#solutionmodels">Solution Models</a></li>
+<li><a href="#ilmodel">Ilmenite</a></li>
+<li><a href="#spmodel">Spinel</a></li>
+</ul>
+
+
+<h2><a name="application">Application of QUILF</a></h2>
+
+<p>Under optimum conditions - which include attainment of equilibrium among the phases in a rock and subsequent preservation of the equilibrium compositions; perfect chemical analyses of those phases; and perfect thermodynamic models - all desired information could be extracted using the minimum number of independent equilibria among the phases.  Reality is quite different: the phases may never have been in equilibrium, or one or more may have continued to react after equilibrium was attained; the analyses of one or more phases may be inaccurate; and the solution models may be in error.  Furthermore, in all natural examples, the phases are chemically more complex than can be described by our models.  For example, both the oxides and the ferromagnesian silicates usually contain Al<sub>2</sub>O<sub>3</sub> (at least in spinels and pyroxenes) and MnO.  When complete thermodynamic models become available, these (often but not always "minor") components can be treated rigorously.  At present, however, we must use projections into the seven-component space of our models.  Wherever possible, our recommended projections are based on experimental data, but at best they are approximations, and they must introduce some uncertainty into the calculations.  Errors resulting from the projections must affect some equilibria more than others.  For all these reasons, therefore, we have written our QUILF program so as to allow the petrologist maximum flexibility in applying it to a given rock or suite.  The user of the program may choose to apply only an independent set of equilibria, to use only a subset of all the equilibria or the phases, or to use the entire set to determine a least-squares "best" fit to the data.  This flexibility, however, puts a heavy burden on the user, for he or she must use both intuition and any available qualitative constraints to guard against implausible results.  Or occasionally an "implausible" result may force the petrologist to re-examine the basic data (or even a thin section!).  Two examples illustrate these ideas.</p>
+
+See also
+<ul>
+<li><a href="#ex1">Adirondacks</a></li>
+<li><a href="#ex2">Skaergaard</a></li>
+</ul>
+
+
+<h3><a name="ex1">Adirondacks</a></h3>
+
+<p>Bohlen and Essene (1977) used two-oxide and two-feldspar thermometry to estimate maximum temperatures of (granulite-facies) metamorphism in the Adirondacks.  The two thermometers gave broadly comformable results, indicating peak temperatures near 800&deg;C.  Many rocks in the area contain relatively Fe-rich augite and Opx.  These pairs were not used in determining metamorphic temperatures, but they still provide useful constraints, for had the granulite-facies temperatures exceeded 808&deg;C, these pyroxenes would have reacted to form metamorphic pigeonites.  The absence of such pigeonites thus indirectly supports the maximum temperatures inferred from the oxides and feldspars.  Had the oxides and feldspars suggested temperatures above 808&deg;C, on the other hand, those values would have had to be treated with great suspicion.</p>
+
+see also
+<ul>
+<li><a href="#application">Application of QUIlF</a></li>
+<li><a href="#ex2">Skaergaard Trend</a></li>
+</ul>
+
+
+<h3><a name="ex2">Skaergaard Trend</a></h3>
+
+<p>Sometimes, however, we may be forced to re-examine cherished ideas.  For example, the famous "Skaergaard trend" (Brown, 1957) had long been considered definitive for the compositions of augite coexisting with low-Ca pyroxene during the differentiation of basaltic magma.  One early pyroxene thermometer even used the Skaergaard compositions as a part of their calibration.  However, in a graphical version of the two-pyroxene thermometer included in the QUILF program, Lindsley and Andersen (1983; Lindsley, 1983) found that the Skaergaard trend appeared to reflect increasing temperature as differentiation progressed, clearly an implausible result.  Either the experiments were wrong, or the Skaergaard trend did not reflect equilibrium.  Upon examination of Skaergaard thin sections, Lindsley and Andersen found unambiguous evidence for granule exsolution of low-Ca pyroxene from the Mg-rich augites.  The textures (and later experiments) showed that the augites had originally contained much less CaSiO<sub>3</sub> component, but that during cooling, these relatively low-Ca augites had exsolved very low-Ca Opx as separate grains.  The remaining augite was thus enriched in Ca.  Because Brown (1957) made wet-chemical analyses of mineral separates, the exsolved granules were analyzed along with the primary Opx, not with the parental augite.  The point is that evidence of granule exsolution might never have been searched for if the (graphical) model had not indicated a discrepancy.  It is no accident that in both these examples it is the rocks themselves that helped the petrologists reach their conclusions!</p>
+
+see also
+<ul>
+<li><a href="#application">Application of QUIlF</a></li>
+<li><a href="#ex1">Adirondacks</a></li>
+</ul>
+
+
+<h2><a name="main">THE MAIN PROGRAM</a></h2>
+
+<p>The program uses two data files, QUILF.RCT, Appendix 1appendix1; and QUILF.SLN. The program is designed to provide the petrologist maximum flexibility in applying the QUIlF equilibria in a wide variety of ways.  One can determine temperature and fO<sub>2</sub> from two oxides alone; or temperature and pressure from the silicates alone; or combine all or parts of these.  One can calculate phase diagrams by instructing the program to cycle through portions of T - fO<sub>2</sub> space, or P - T space, or composition space.</p>
+<p>Program QUILF uses the solution models and mutually consistent standard-state data to search for equilibrium by free-energy minimization.  After each iteration, the free energies indicated by the standard states are compared with those derived from RT ln a (activity) terms.  When the difference between these becomes less than 0.1% for a reaction (or equilibrium), the constraints for that reaction are considered to have been satisfied.
+ <p>Because the various solution models and standard-state terms must remain mutually consistent, it is imperative that no data in QUILF.SLN be modified or "updated".  Changing any values would require re-modelling the entire system, a daunting task.</p>
+
+
+
+<h3><a name="enteringdata">Entering Data</a></h3>
+
+<p>Once the program start, the operator types in the appropriate variables as defined in Table 1definitions.  For maximum flexibility, each variable can be input in any of four forms: #; #?; #1,#2,#3; or #1(#2), where # indicates a numeric value.  The first form indicates that the variable is to be fixed during the calculations - for example, 900 (temperature in Celsius), -10.0 (log10 fO<sub>2</sub>), 0.598 (mole fraction).  The second form - a numeric value followed by ? - means that it is a trial value only, with a final value to be calculated by the program.  For example, a trial temperature of 900? might yield a calculated value of 629.6 (or 1196.3)&deg;C, depending on the compositional variables.  The third form sets up a For ... Next loop in the value of the variable.  For example, an entry for T(C) of 650,1201,50 would run the program at 650&deg;C  and at 50&deg;C increments up to and including 1200&deg;C.  [Because of the vagaries of real numbers, it is best if the upper bound is slightly larger than the target value to assure that the upper limit will be included in the calculations.]  In the fourth form, #1 is a preferred value which is followed by an estimated uncertainty (#2) in parentheses.  Most commonly this would be used for compositions [for example, an entry of 0.043(0.004) for XGk refers to a mole fraction of 0.04<sup>3+</sup>0.004 for MgTiO<sub>3</sub> in ilmenite] but can also be applied to any other variable.  This form computes identically to the second [#?] unless it is combined with the third form in at least one of the other variables.  When coupled with one or more loops in other variables, the fourth form directs the program to determine an optimum value of the variable that is as close as possible to the input value within its range of uncertainty.  For example, if the temperature is being cycled via a For ... Next loop, the program will flag and display that temperature which provides the best fit to, say, a composition that is entered as 0.547(0.01).  The four types of data entries are illustrated in the worked examplesworkedex near the end of this paper.</p>
+
+
+
+
+<h3><a name="editing">Editing Data</h3>
+
+<p>Right and left arrow keys are used to position the cursor within an entry.  Mistakes can be erased or trial values altered by use of the backspace and Del keys.  The Tab key is used to move to the next cell to the right.  Once a value has been entered (in one of the four forms described above), the operator simply moves the cursor to the next desired entry by using the up and down arrows.  It is not necessary to type [CR] to complete an entry; doing so is permitted, but acts simply as the equivalent of down arrow.  Temperature [T(C)] and pressure [P] must be entered for all calculations, but any other entry can be left blank if desired.  Reasons for leaving an entry blank can vary; the most obvious one is that a phase is absent from the assemblage being assessed.  However, it is also quite possible to see how the calculations will run ignoring a phase even if it is present.  Likewise, if the petrologist does not wish to calculate values for any of the intensive parameters [fO<sub>2</sub>; and the activities of SiO<sub>2</sub>, Fe, or TiO<sub>2</sub>], the appropriate entry or entries should simply be left blank.  Of course, if the phases present do not permit calculation of one of those parameters, the entry must be left blank or the program will go into an endless loop and/or print an error message.  It is also possible to leave blank a part of a composition.  For example, in a two-oxide + olivine + quartz assemblage, the calcium content of the olivine [XLa] may well be small or unknown and can be omitted.  Such omissions can be dangerous, however, because one component of each phase [x1 (or XMt) for  spinel; XIl for ilmenite; the iron endmembers for the pyroxenes and olivine] is calculated by difference.  Thus the omission of, say, XGk from ilmenite or XWo from Opx when these values are non-trivial can introduce substantial errors into the calculations.  The user cannot enter values (either trial or fixed) for DFMQ [ log fO<sub>2</sub>, or the difference between the calculated log fO<sub>2</sub> and that for the FMQ buffer at the indicated temperature and pressure] or XIl [the mole fraction of FeTiO<sub>3</sub> in ilmenite], so the cursor skips these entries.  Those headings are present so that the calculated values can be displayed after the program is executed.</p>
+
+
+
+
+<h3><a name="projections">Projection of Mineral Compositions</a></h3>
+
+<p>Compositional parameters to be entered into the QUILF program must have been projected into the appropriate compositional sub-systems: FeO-MgO-MnO-Fe<sub>2</sub>O<sub>3</sub>-TiO<sub>2</sub> for the oxides, CaO-MgO-FeO-SiO<sub>2</sub> for the ferromagnesian silicates.  In addition, the compositions must be expressed in the appropriate form.  We very strongly recommend that users of the QUILF program use the projection programs that we have developed explicitly for this purpose.  The projection from the weight percent of the oxides can be accomplished by selecting Edit-Weight Percenteditmenu from the main menu and choosing the appropriate phase. These routines yield suitable values of XEn and XWo for pyroxene thermometry by our methods (Lindsley and Andersen, 1983; Lindsley, 1983; Davidson and Lindsley, 1989).  We emphasize that other projections, including those built into many electron microprobe data-reduction programs, will not yield suitable results.  Particularly egregious are those programs that combine Mn with Fe<sup>2+</sup>; this is an ancient procedure stemming from the geochemical similarity of Mn and Fe<sup>2+</sup>.  However, an abundance of experimental data shows that Fe<sup>2+</sup> and Mn have very different - and sometimes opposite -effects on the stability of pyroxenes and olivine.  If readers insist on using programs other than those included to provide input into QUILF, we urge them to state so clearly in any publication of the results.  We do recommend one modification of the results using the pyroxene projections; since our projection scheme was presented in 1983, we have found that it tends to underestimate XWo (for augite), and thus may yield suspiciously high temperatures, only for augites that contain substantial (> 10%) "others" or nonquadrilateral components.  For such augites only, we recommend using values of XWo that range from those provided to those from more conventional projections.  [This can be done very simply using input option 3 described above.]  </p>
+<p>To avoid confusion in the ensuing discussion, only values entered in the second [#?] and fourth [#1(#2)] forms will be referred to as variables.  Other values, which are not allowed to vary during a given calculation, will be called fixed values.   For simplicity, the discussion also uses the term "reaction" to include both mass-transfer reactions and equilibria such as Fe-Mg exchange or displaced equilibria.
+
+
+See also<ul>
+<li><a href="#olproj">Olivine</a></li>
+<li><a href="#oxproj">Oxides</a></li>
+</ul>
+
+<h3><a name="olproj">Olivine Projection</a></h3>
+
+<p>We have not developed a separate projection scheme for olivine; almost always the Ca and "others" components are so low that the choice of projection should make very little difference.  As is the case for pyroxenes, it is very important that Mn not be lumped with Fe<sup>2+</sup>.</p>
+
+see also
+<ul>
+<li><a href="#projections">Projections</a></li>
+</ul>
+
+
+
+<h3><a name="oxproj">Oxide Projections</a></h3>
+
+<p>The choice of projection is perhaps less critical for the oxides, because in our experience the results of most oxide projection schemes vary but little.  Nevertheless, we recommend the use of our projection program because its output is specifically tailored to the needs of the QUILF program, so that mistakes are less likely to be made in converting the typical XUsp and XIlm of the earlier programs to the NTi, NMg, NMn, XGk, and XHem needed in QUILF.  As in the case for the pyroxene projections, we urge petrologists who use QUILF to state clearly, in any publication, the oxide projection scheme used.</p>
+
+see also
+<ul>
+<li><a href="#projections">Projections</a></li>
+</ul>
+
+
+
+<h2><a name="executing">Executing the Program</a></h2>
+
+<p>Once the input data have been entered to the user's satisfaction, they can be processed in several ways by means of the menu items at the top of the screen.  The function key F1 is a shortcut for Help and F2 for a Least-Squareslsq calculation.  Once a set of compositions have been entered, the Edit-Select Reactionssubset allows a subset of possible reactions to be selected.  The Edit-Copy menu copies the current window to the clipboard, which then can be pasted into another program.</p>
+
+
+
+<h3><a name="lsq">Least Squares</a></h3>
+
+<p>F2-LSQ uses least-squares to get the "best" values of the variables.  When this mode is invoked (by pressing F2 or selecting LSQ-start from the menu), the program searches the file QUILF.RCT (Appendix 1) to find all the reactions that are possible among the phases listed and that can affect the value of one or more of the variables being refined.  In almost all cases the number of possible reactions used exceeds the number of independent reactions.  Once these have been identified, and may displayed from the Reactions menu, the program then performs the least-squares calculations and displays the results in the column labelled "Calc".  It is easy to compare the initial and model results.  Next is a column labelled "Uncer"; this is not a statistical uncertainty, but rather an expression of the amount by which the input variables would have to change to permit an exact solution - one that would precisely satisfy all the equilibria.  Unless the program finds an exact solution (defined as the residuals for all reactions being less than 0.1%), the reactions that "failed" and their residuals may be displayed in the Test Reactions window (and in the text-file or printer if ECHO has been activated).  The tolerance of 0.1% is necessary in only a few cases, and it is quite possible to obtain a very good solution even if all the reactions are listed as "failed".  For example, a residual of 500 J corresponds to an error of approximately 10 degrees - well within the uncertainties of the models - for the FeTi (Fe<sup>2+</sup>Ti<sup>4+</sup>Fe<sup>3+</sup>-2) reaction.</p>
+
+
+
+<h3><a name="subset">Selecting Reactions</a></h3>
+<p>Edit- Select Reactions provides a window which a list of all possible equilibria that can affect the values of the variables to be calculated.  The petrologist then may choose the equilibria needed to solve for the variables.  The cursor movement keys are used to move to the desired reactions.  Reactions are selected by pressing the space-bar which are then marked by an [X].  (Pressing the space-bar when the cursor is on a reaction that is already selected deselects that reaction.)  The selection process is terminated by pressing Enter.  One may SELECT more than reactions than there are variables and press F1-LSQ; the program will then perform a least-squares fit using only the selected reactions.</p>
+
+
+
+<h3><a name="activities">Activities</a></h3>
+
+ <p>Activities may be calculated from the View-Activities menu using the calculated values or the input values if these have changed.  The standard state values that are displayed are those values used in the program and are internally consistent.  The standard-state values have been adjusted so that the differences calculated from the equilibria in QUILF.RCT are consistent with one another and should NOT be used outside of the program.  They are provided only to provide a check on the calculated equilibria and are NOT to be compared to other thermodynamic databases.</p>
+
+
+
+
+<h3><a name="options">Options</a></h3>
+
+<p>Two options may be set from the LSQ menu.  The first, Watch,  is to set a flag so that the user can see the intermediate compositions as program converges towards a solution. The second, Echo, is to set up an output file and selectively turn on the printing of the calculated values, activities or tests of equilibria. Selecting the file "PRN" will send the output to the printer instead of a file.</p>
+
+
+
+
+<h2><a name="caveats">SOME CAVEATS; POTENTIAL PROBLEMS IN USING QUILF</a></h2>
+
+<p>Because the QUIlF equilibria are complex, there are a number of possible pitfalls in using the program.  We have identified a number of these; the user is warned by one of the error messages in Table 2errormessages.  If it appears that the program is hung up, one can abort the calculations by pressing Escnot. [However, users should be aware that generally, the more phases that are included, and the more variables to be calculated, the longer the program will take to converge to a solution.]  One must avoid inputting impossible compositions (for example, those for which x + y > 1 for a silicate), or requesting calculation of a variable that is not governed by any possible reaction among the phases.  Examples include the calculation of fO<sub>2</sub> if no redox equilibria are possible (neither an oxide nor Feo is present; Feo is indicated by setting Fe = 1); the calculation of the activity of SiO<sub>2</sub> if no reaction involving SiO<sub>2</sub> is possible; or the calculation of pressure if the phases do not permit assessment of an equilibrium like reaction (6).  A common (but subtle) error is to request calculation of the activity of SiO<sub>2</sub> for Fe-rich Opx coexisting with olivine and/or oxides; if the resulting value of the activity of SiO<sub>2</sub> would exceed 1.0, the program iterates for a long time and eventually gives error message "Too many independent variables, not enough independent reactions:".  Use of the Options - WATCH On option should enable the user to detect this problem; the value of SiO<sub>2</sub> will remained pinned at 1.0 for all iterations.</p>
+
+see also
+<ul>
+<li><a href="#pxproblems">Special Problems with Pyroxenes</a></li>
+<li><a href="#pigproblems">Problems with Pigeonite</a></li>
+</ul>
+
+
+<h3><a name="pxproblems">Special Problems with Pyroxenes</a></h3>
+
+<p>Calculation of pyroxene equilibria can pose problems: for example, the program will calculate (metastable) augite + opx equilibrium even though pigeonite or olivine + quartz + augite may be more stable.  Sometimes one wishes to calculate such metastable equilibria, but in any case, it is the user's responsibility to test whether another assemblage may be more stable.</p>
+
+see also
+<ul>
+<li><a href="#caveats">Some Caveats</a></li>
+<li><a href="#pigproblems">Problems with Pigeonite</a></li>
+</ul>
+
+
+<h3><a name="pigproblems">Problems with Pigeonite</a></h3>
+
+<p>Calculations involving pigeonite can be particularly difficult.  Because the pyroxene solution model treats (high-temperature) pigeonite and augite as the same clinopyroxene solution, attempts to calculate coexisting augite + pigeonite may yield identical compositions for both phases even for bulk compositions for which two clinopyroxenes are stable.  This problem can usually be avoided by choosing trial compositions very close to the equilibrium compositions.  Another problem is the calculation of pigeonite + opx equilibria.  These phases can coexist for Fe-rich compositions at temperatures above approximately 808&deg;C; up to approximately 1200&deg;C, however, as compositions become more magnesian, the stable assemblage becomes pigeonite + augite + opx and eventually augite + opx.  The QUILF program may continue to calculate pigeonite in (apparent) equilibrium with orthopyroxene even for Mg-rich compositions and even when the initial composition of the clinopyroxene is calcic.  This problem apparently results from the very gentle curvature of the clinopyroxene free-energy curve near the crest of the miscibility gap; evidently the program can calculate a "minimum" free energy (within the 0.1 J tolerance) for pigeonite + opx within this region.  If the user suspects this problem is occurring, we recommend comparison of the results with published pyroxene quadrilateral diagrams such as those given by Lindsley and Frost (1991).  This problem can generally be avoided by starting the calculations at very magnesian compositions (near the Di-En join) and using each calculated XWo as the trial value for the next, slightly more Fe-rich bulk composition to be calculated.</p>
+
+see also
+<ul>
+<li><a href="#caveats">Some Caveats</a></li>
+<li><a href="#pxproblems">Special Problems with Pyroxenes</a></li>
+</ul>
+
+
+<h2><a name="workedex">SOME WORKED EXAMPLES</a></h2>
+
+<p>Because running Program QUILF can be tricky, we give a number of worked examples to illustrate its application.  The examples have been chosen for a sample from the Bishop Tuff (Hildreth, 1977).  The sample (#77) contains Ti-magnetite (NTi = 0.272; NMg = 0.043), ilmenite (XGk = 0.062; XHem = 0.133), Opx (XEn = 0.522; XWo = 0.021), augite (XEn = 0.383; XWo = 0.383), and quartz.</p>
+
+see also
+<ul>
+<li><a href="#twooxide">Two-Oxides</a></li>
+<li><a href="#effectsmgo">Effects of MgO</a></li>
+<li><a href="#bishoptuff">Pyroxene Equilibria</a></li>
+<li><a href="#putting">Putting it all together</a></li>
+</ul>
+
+
+<h3><a name="twooxide">Two Oxides</a></h3>
+
+<p>First we obtain a conventional two-oxide temperature and fO<sub>2</sub>.  A trial value of 1100? is entered for T(C), and a fixed pressure of 2000 bars is used.  [The choice of pressure is unimportant because the two-oxide thermometer is essentially independent of pressure.]  Next comes a trial value of -10? for fO<sub>2</sub>, and then the values of NTi and XHem are entered which is shown in Fig. 2. </p>
+
+<image src="images/fig2.gif"/>
+
+<p> Next, the petrologist presses F1-LSQ to start the calculation.  The results are shown in Fig. 3.</p>
+
+<image src="images/fig3.gif"/>
+
+<p>  The temperature is calculated as 819&deg;C (1092 K); values are also given for fO<sub>2</sub> (log fO<sub>2</sub>) and DFMQ (the difference between the calculated log fO<sub>2</sub> and that for the FMQ buffer at the same P and T).  The value for XIl which is simply 1 - XHem, is also shown.  The uncertainties are shown as zero because this is an exact solution: there are two unknowns (T(C) and fO<sub>2</sub>) and two reactions (FeTi and MH), as shown on the right.</p>
+<p>Of course, the real uncertainties in temperature and fO<sub>2</sub> are not zero.  Uncertainties resulting solely from the solution models for the oxides are approximately + 10&deg;C and + 0.1 log units in fO<sub>2</sub> (Andersen and Lindsley, 1988).  If we also assume reasonable uncertainties of + 0.01 mole fraction in the compositions, we can calculate their contributions by cycling the calculations through the extreme compositions (Fig. 4).  Purely for illustrative purposes, we have also entered fO<sub>2</sub> in the fourth form [-10(2)].  Fig. 4 shows the input data with the compositions in For ... Next form.  Examination of the model values show a range in temperature of 30o and DFMQ varies over a range of 0.256 log units (the range in log fO<sub>2</sub> is greater because it includes the temperature effect on fO<sub>2</sub>).  </p>
+
+<image src="images/fig4.gif"/>
+
+<p>Thus the combined errors in temperature and DFMQ for this sample are approximately + 25&deg;C and 0.133, respectively.  The "best" value - here defined as the set of compositions that yields the calculated value of fO<sub>2</sub> closest to the trial value is that for NTi = 0.282, XHem = 0.143.  We emphasize that this result has no significance other than to illustrate the effect of combining an entry in the fourth form [#1(#2)] with one or more For . . . Next loops.</p>
+
+see also
+<ul>
+<li><a href="#workedex">Some Worked Examples</a></li>
+<li><a href="#effectsmgo">Effects of MgO</a></li>
+<li><a href="#bishoptuff">Pyroxene Equilibria</a></li>
+<li><a href="#putting">Putting it all together</a></li>
+</ul>
+
+
+<h3><a name="effectsmgo">The Effects of MgO</a></h3>
+
+<p>Next we can include the effects of MgO in the oxides; we restore NTi and XHem to their nominal values, and add NMg and XGk.  Figure 5 shows the input values at the left, the results in the "Calc" column, formal errors in T(C) and fO<sub>2</sub> under "Uncer", and three reactions - FeMgIlSp in addition to FeTi and MH - in the Selected Reactions and Test Reactions windows.  Note that two reactions "failed"; that is, their residuals are greater than 0.1%.  This is because the Mg contents of the Ti-magnetite and the ilmenite are not in perfect equilibrium (at least according to the solution models).  The indicated temperature is slightly (but not significantly) lower than that obtained by ignoring MgO. </p>
+
+<image src="images/fig5.gif"/>
+
+<p> We can determine just how far the oxides are from mutual Fe-Mg exchange equilibrium by letting one Mg component vary; in Fig. 6, XGk has been fixed and NMg allowed to vary.</p>
+
+<image src="images/fig6.gif"/>
+
+<p>  The calculated value for NMg (0.040) is within 10% (and probably within analytical uncertainty) of the original value; the effect of the change on temperature is trivial.  Note that once again we have three variables and three reactions, so the solution is mathematically exact, and there are no formal errors.  The reader is invited to practice by repeating this step fixing NMg and allowing XGk to be calculated. </p>
+<p>Now we can ask whether the reported MgO contents of the oxide minerals are in Fe-Mg exchange equilibrium with one of the pyroxenes - say, Opx.  The values of XEn and XWo for Orthopyroxene are entered, and both NMg and XGk are allowed to vary (Fig. 7).</p>
+
+<image src="images/fig7.gif"/>
+
+<p>  The calculated values of NMg and XGk show marginally significant increases of approximately 25%.  It is possible that these increases are artifacts of the solution models; however, Frost and Lindsley (in press) have argued strongly that even quickly cooled oxides like those in the Bishop Tuff tend to purge themselves of Mg upon cooling.  For purposes of this illustration, we shall assume that the calculated values are more nearly correct.  Note that there are now five possible reactions - FeTi, MH, FeMgIlSp, FeMgOpxIl, and FeMgOpxSp - but note also that the fifth one can be derived from the third and fourth.  Thus we have four unknowns and four independent reactions, and hence an exact solution.</p>
+
+see also
+<ul>
+<li><a href="#workedex">Some Worked Examples</a></li>
+<li><a href="#twooxide">Two-Oxides</a></li>
+<li><a href="#bishoptuff">Pyroxene Equilibria</a></li>
+<li><a href="#putting">Putting it all together</a></li>
+</ul>
+
+
+<h3><a name="bishoptuff">Pyroxene Equilibria</a></h3>
+
+<p>At this stage it is useful to determine the temperature using the two pyroxenes.  Use backspace to delete the entries for fO<sub>2</sub>, NTi, NMg, XGk, and XHem, and add the values for XEn and XWo in augite.  The effect of pressure is no longer completely negligible, but for the moment we shall retain the fixed value of 2000 bars and allow temperature to vary.  Fig. 8 shows the results of the calculation; there is one unknown (temperature) but four equations - the equality of each pair of end-member chemical potentials for Opx and augite. </p>
+
+<image src="images/fig8.gif"/>
+
+<p> The residuals range in relative magnitude from 0.6 to 260%; the formal uncertainty in temperature is 16 degrees.  The relatively low value for the temperature uncertainty indicates that the Opx and augite are close to being in equilibrium according to the models.  The relatively high percentage of the residuals is due to the relatively low values for both dG and lnK.  Note that the augite and Opx compositions are each separate geothermometers, so long as it is specified that the other phase is present.  As was the case for the oxides, therefore, we can test for departure from equilibrium by allowing the composition of one pyroxene to vary so as to be in equilibrium with the other.  Either composition could be allowed to vary; in this example we let augite vary, because there is some ambiguity in the amount of Fe<sup>3+</sup> in the projected analysis, an ambiguity that carries over into the projected values of XEn and XWo.  Thus in Fig. 9, the augite composition was allowed to vary.</p>
+
+<image src="images/fig9.gif"/>
+
+<p>  The model values are within analytical uncertainty of the input composition, and the calculated temperature changes insignificantly.  We conclude that the augite and Opx of sample #77 were in equilibrium at approximately 825&deg;C.  That temperature is slightly greater than, but within the overall uncertainty of, the temperature inferred from the oxides.  For simplicity in the next example, we shall continue to allow the augite compositions to vary the small amounts necessary to remain in exact equilibrium with Opx.</p>
+
+see also
+<ul>
+<li><a href="#workedex">Some Worked Examples</a></li>
+<li><a href="#twooxide">Two-Oxides</a></li>
+<li><a href="#effectsmgo">Effects of MgO</a></li>
+<li><a href="#putting">Putting it all together</a></li>
+</ul>
+
+
+
+<h3><a name="putting">Putting It All Together</a></h3>
+
+<p>This section illustrates the results of using all five phases to calculate QUIlF equilibria.  For the first time, we allow pressure to vary.  To permit the oxide temperature to equal that indicated by the Opx, we allow XHem to vary.  [We could have allowed NTi in the Ti-magnetite to vary, but modal data for the Bishop Tuff indicate that magnetite is about 10 times as abundant as ilmenite, so that if either phase has reset slightly it is likely to be the ilmenite.]  Now there are 17 possible reactions used in the least-squares.  The result is an "exact" solution that yields 827&deg;C and 2554 bars.  Calculations on numerous other samples from the Bishop Tuff led Frost and Lindsley (in press) to conclude that the uncertainties in temperature and pressure are approximately + 20 degrees and + 500 bars.  The reader is invited to repeat the calculations by allowing different compositions to vary.  One obvious choice is to fix augite and to allow the composition of Opx to vary.  The results should include 1111 degrees, 2452 bars, and for OPX; XEn = 0.54357, and XWo = 0.02099.</p>
+
+<image src="images/fig10.gif"/>
+
+<p>It is important to note that these calculations in this example will not work if the compositions of both pyroxenes are fixed.  This is because small variations in XEn in both augite and orthopyroxene - well within analytical error - can result in apparent pressure differences of thousands of bars as calculated from pyroxene-pyroxene equilibria.  For som pyroxene compositions, the program will try to calculate a negative pressure, and will eventually give an error message.  A corollary is that one must not use pyroxene compositions alone to calculate pressure - even if the calculated pressure happens to fit one's preconceptions!  As emphasized earlier, only pressures that are calculated from reaction (6) and its redox derivatives should be believed.  For Bishop Tuff sample #77, the appropriate equilibria are (Appendix 1): OMQ (3Fe<sub>2</sub>Si<sub>2</sub>O<sub>6</sub> (in Opx) + O<sub>2</sub> = 2Fe3O<sub>4</sub> + 6SiO<sub>2</sub>), OHQ (2Fe<sub>2</sub>Si<sub>2</sub>O<sub>6</sub> (in opx) + O<sub>2</sub> = 2Fe<sub>2</sub>O<sub>3</sub> + 4SiO<sub>2</sub>), AMQ (3Fe<sub>2</sub>Si<sub>2</sub>O<sub>6</sub> )in augite) + O<sub>2</sub> = 2Fe3O<sub>4</sub> + 6SiO<sub>2</sub>) and AHQ (2Fe<sub>2</sub>Si<sub>2</sub>O<sub>6</sub> (in augite) + O<sub>2</sub> = 2Fe<sub>2</sub>O<sub>3</sub> + 4SiO<sub>2</sub>).  In all these cases, fayalite in the primary equilibrium (6) is replaced by its oxidized equivalents magnetite + quartz or hematite + quartz.</p>
+
+see also
+<ul>
+<li><a href="#workedex">Some Worked Examples</a></li>
+<li><a href="#twooxide">Two-Oxides</a></li>
+<li><a href="#effectsmgo">Effects of MgO</a></li>
+<li><a href="#bishoptuff">Pyroxene Equilibria</a></li>
+</ul>
+
+<h2><a name="acknow">ACKNOWLEDGEMENTS</a></h2>
+
+<p>We thank Ron Frost for encouraging us to think about QUIlF equilibria at many stages over the years and for serving as a guinea pig in using the program.  Support by NSF grant EAR-8720185 and its predecessors to DHL is gratefully acknowledged.</p>
+
+
+
+
+
+<h2><a name="">OBTAINING WORKING COPIES OF THE PROGRAMS</a></h2>
+
+<p>Readers who wish to obtain copies of QUILF should send an unformatted diskette and a self-addressed adhesive mailing label to DHLtitlepage.  We will provide QUILF.EXE, QUILF.RCT, QUILF.HLP, and QUILF.SLN.  Because we have had bad experiences in the past of users modifying our programs and then announcing publicly that "our" programs were flawed, we prefer to supply compiled programs.  Readers who feel they need the source programs should send a convincing statement as to why they require the source codes.  It has been our experience that approximately one in ten diskettes becomes physically (not magnetically) damaged in the mails; accordingly, readers should be sure that their diskettes are well protected, preferably in sturdy mailers.</p>
+
+
+
+
+<h2><a name="references">REFERENCES</a></h2>
+
+<p>ANDERSEN D. J. (1988)  Internally Consistent Solution Models for FeMgMnTi Oxides. Ph.D Dissertation, State University of New York at Stony Brook, xii + 202p.</p>
+<p>ANDERSEN D. J., BISHOP F. C. and LINDSLEY D. H. (1988)  Internally consistent solution models for FeMgMnTi oxides:  Part II. FeMgTi oxides and olivine. American Mineralogist (submitted April, 1988), </p>
+<p>ANDERSEN D. J. and LINDSLEY D. H. (1988)  Internally consistent solution models for FeMgMnTi oxides: FeTi oxides. American Mineralogist 73, 714726.</p>
+<p>BOHLEN S. R. and ESSENE E. J. (1977)  Feldspar and oxide thermometry of granulites in the Adirondack Highlands. Contributions to Mineralogy and Petrology 62, 153169.</p>
+<p>BROWN G. M. (1957)  Pyroxenes from the early and middle stages of fractionation of the Skaergaard intrusion, east Greenland. Mineralogical Magazine 31, 511543.</p>
+<p>DAVIDSON P. M. (1985)  Thermodynamic analysis of quadrilateral pyroxenes.  Part I. Derivation of the ternary nonconvergent sitedisorder model. Contributions to Mineralogy and Petrology 91, 383389.</p>
+<p>DAVIDSON P. M. and LINDSLEY D. H. (1989)  Thermodynamic analysis of pyroxeneolivinequartz equilibria in the system CaOMgOFeOSiO<sub>2</sub>. American Mineralogist 74, 1830.</p>
+<p>DAVIDSON P. M. and MUKHOPADHYAY D. K. (1984)  CaFeMg olivines:  Phase relations and a solution model. Contributions to Mineralogy and Petrology 86, 256263.</p>
+<p>FROST B. R. and LINDSLEY D. H. Equilibria among FeTi oxides, pyroxenes, olivine, and quartz: 2. Applications. American Mineralogist in press, </p>
+<p>FROST B. R., LINDSLEY D. H. and ANDERSEN D. J. (1988)  FeTi oxidesilicate equilibria:  Assemblages with fayalitic olivine. American Mineralogist 73, 727740.</p>
+<p>GHIORSO M. S. (1990)  Thermodynamic properties of hematiteilmenitegeikielite solid solutions. Contributions to Mineralogy and Petrology 104, 645667.</p>
+<p>GHIORSO M. S. and SACK R. O. (1989)  A reappraisal of FeTi oxide geothermometry in light of new thermodynamic solution models for MgFe<sup>2+</sup>AlFe<sup>3+</sup>Ti spinel and MgFe<sup>2+</sup>Fe<sup>3+</sup> rhombohedral oxide solid solutions. EOS (Transactions, American Geophysical Union) 70, 1387.</p>
+<p>HILDRETH W. (1977)  The magma chamber of the Bishop Tuff:  Gradients in pressure, temperature, and composition. Ph.D. Dissertation, University of California, 328 pp.p.</p>
+<p>LINDSLEY D. H. (1983)  Pyroxene thermometry. American Mineralogist 68, 477493.</p>
+<p>LINDSLEY D. H. and ANDERSEN D. J. (1983)  A twopyroxene thermometer. Journal of Geophysical Research Supplement 88, A887A906.</p>
+<p>LINDSLEY D. H. and FROST B. R. Equilibria among FeTi oxides, pyroxenes, olivine, and quartz: 1. Theory. American Mineralogist in press, </p>
+<p>LINDSLEY D. H., FROST B. R., ANDERSEN D. J. and DAVIDSON P. M. (1990)  FeTi oxide  silicate equilibria: Assemblages with orthopyroxene.  in FluidMineral Interactions:  A Tribute to H. P. Eugster (Eds. R. J. Spencer and I.M. Chou), The Geochemical Society, Special Publication No. 2.</p>
+<p>LINDSLEY D. H. and SPENCER K. J. (1982)  FeTi oxide geothermometry:  Reducing analyses of coexisting Timagnetite (Mt) and ilmenite (Ilm). EOS (Transactions, American Geophysical Union) 63, 471.</p>
+<p>SACK R. O. and GHIORSO M. S. (1989)  Importance of consideration of mixing properties in establishing an internally consistent thermodynamic database:  thermochemistry of minerals in the system Mg<sub>2</sub>SiO<sub>4</sub>Fe<sub>2</sub>SiO<sub>4</sub>SiO<sub>2</sub>. Contributions to Mineralogy and Petrology 102, 4168.</p>
+<p>SACK R. O. and GHIORSO M. S. (1990)  Spinels as petrogenetic indicators: Thermodynamics and petrological applications. Geological Society of America, Abstracts with Programs 1990, A70.</p>
+
+
+
+<h2><a name="appendix1">APPENDIX 1: Listing of QUILF.RCT</a></h2>
+<listing>
+      (Reactions and equilibria used by QUILF.EXE)
+
+; Qtz+Usp+IL+Fa+Px+Iron+Qtz+Rutile
+;
+; Format of a reaction, assumes a balanced reaction
+;
+; 'ReactionName'; reactant1 + reactant2 = product1 + product2
+;
+; The ReactionName is in quotes, followed by a semicolon
+; if the coefficent of the reactant or product is not one, preceed the
+; name of the component with the coefficent.
+; 
+; Lines beginning with a semicolon are comments.
+;
+; This is a fairly complete list, if you make any changes, instead of deleting
+; the line, just put a semicolon at the beginning of the line.
+;
+; 2 oxides
+;
+'FeTi';			Fe3O<sub>4</sub> + FeTiO<sub>3</sub> = Fe<sub>2</sub>TiO<sub>4</sub> + Fe<sub>2</sub>O<sub>3</sub>
+'MH';			4Fe3O<sub>4</sub> + O<sub>2</sub> = 6Fe<sub>2</sub>O<sub>3</sub>
+'FeMgIlSp';		MgFe<sub>2</sub>O<sub>4</sub> + FeTiO<sub>3</sub> = Fe3O<sub>4</sub> + MgTiO<sub>3</sub>
+'FeMnIlSp';		MnFe<sub>2</sub>O<sub>4</sub> + FeTiO<sub>3</sub> = Fe3O<sub>4</sub> + MnTiO<sub>3</sub>
+;
+; silicate + oxide
+;
+'FeMgOlIl';		oFe<sub>2</sub>SiO<sub>4</sub> + 2MgTiO<sub>3</sub> = oMg<sub>2</sub>SiO<sub>4</sub> + 2FeTiO<sub>3</sub>
+'FeMgAugIl';		aFe<sub>2</sub>Si<sub>2</sub>O<sub>6</sub> + 2MgTiO<sub>3</sub> = aMg<sub>2</sub>Si<sub>2</sub>O<sub>6</sub> + 2FeTiO<sub>3</sub>
+;'FeMgCaAugIl';	aCaFeSi<sub>2</sub>O<sub>6</sub> + MgTiO<sub>3</sub> = aCaMgSi<sub>2</sub>O<sub>6</sub> + FeTiO<sub>3</sub>
+'FeMgPigIl';		pFe<sub>2</sub>Si<sub>2</sub>O<sub>6</sub> + 2MgTiO<sub>3</sub> = pMg<sub>2</sub>Si<sub>2</sub>O<sub>6</sub> + 2FeTiO<sub>3</sub>
+'FeMgOpxIl';		oFe<sub>2</sub>Si<sub>2</sub>O<sub>6</sub> + 2MgTiO<sub>3</sub> = oMg<sub>2</sub>Si<sub>2</sub>O<sub>6</sub> + 2FeTiO<sub>3</sub>
+;'FeMgCaOpxIl';	oCaFeSi<sub>2</sub>O<sub>6</sub> + MgTiO<sub>3</sub> = oCaMgSi<sub>2</sub>O<sub>6</sub> + FeTiO<sub>3</sub>
+'FeMgOlSp';		oFe<sub>2</sub>SiO<sub>4</sub> + 2MgFe<sub>2</sub>O<sub>4</sub> = oMg<sub>2</sub>SiO<sub>4</sub> + 2Fe3O<sub>4</sub>
+'FeMgOpxSp';		oFe<sub>2</sub>Si<sub>2</sub>O<sub>6</sub> + 2MgFe<sub>2</sub>O<sub>4</sub> = oMg<sub>2</sub>Si<sub>2</sub>O<sub>6</sub> + 2Fe3O<sub>4</sub>
+'FeMgAugSp';		aFe<sub>2</sub>Si<sub>2</sub>O<sub>6</sub> + 2MgFe<sub>2</sub>O<sub>4</sub> = aMg<sub>2</sub>Si<sub>2</sub>O<sub>6</sub> + 2Fe3O<sub>4</sub>
+'FeMgPigSp';		pFe<sub>2</sub>Si<sub>2</sub>O<sub>6</sub> + 2MgFe<sub>2</sub>O<sub>4</sub> = pMg<sub>2</sub>Si<sub>2</sub>O<sub>6</sub> + 2Fe3O<sub>4</sub>
+;
+; olivine + pyroxene
+;
+'FeMgOlAug';		oMg<sub>2</sub>SiO<sub>4</sub> + aFe<sub>2</sub>Si<sub>2</sub>O<sub>6</sub>  = oFe<sub>2</sub>SiO<sub>4</sub> + aMg<sub>2</sub>Si<sub>2</sub>O<sub>6</sub>
+'FeCaOlAug';		oFe<sub>2</sub>SiO<sub>4</sub> + aCaFeSi<sub>2</sub>O<sub>6</sub> = oCaFeSiO<sub>4</sub> + aFe<sub>2</sub>Si<sub>2</sub>O<sub>6</sub>
+;'FeMgCaOlAug';	oCaMgSiO<sub>4</sub> + aCaFeSi<sub>2</sub>O<sub>6</sub> = oCaFeSiO<sub>4</sub> + aCaMgSi<sub>2</sub>O<sub>6</sub>
+
+'MgCaOlAug';		oMg<sub>2</sub>SiO<sub>4</sub> + aCaMgSi<sub>2</sub>O<sub>6</sub> = oCaMgSiO<sub>4</sub> + aMg<sub>2</sub>Si<sub>2</sub>O<sub>6</sub>
+'FeMgOlPig';		oMg<sub>2</sub>SiO<sub>4</sub> + pFe<sub>2</sub>Si<sub>2</sub>O<sub>6</sub> = oFe<sub>2</sub>SiO<sub>4</sub> + pMg<sub>2</sub>Si<sub>2</sub>O<sub>6</sub>
+'FeCaOlPig';		oFe<sub>2</sub>SiO<sub>4</sub> + pCaFeSi<sub>2</sub>O<sub>6</sub> = oCaFeSiO<sub>4</sub> + pFe<sub>2</sub>Si<sub>2</sub>O<sub>6</sub>
+;'FeMgCaOlPig';	oCaMgSiO<sub>4</sub> + pCaFeSi<sub>2</sub>O<sub>6</sub> = oCaFeSiO<sub>4</sub> + pCaMgSi<sub>2</sub>O<sub>6</sub>
+'MgCaOlPig';		oMg<sub>2</sub>SiO<sub>4</sub> + pCaMgSi<sub>2</sub>O<sub>6</sub> = oCaMgSiO<sub>4</sub> + pMg<sub>2</sub>Si<sub>2</sub>O<sub>6</sub>
+'FeMgOlOpx';		oMg<sub>2</sub>SiO<sub>4</sub> + oFe<sub>2</sub>Si<sub>2</sub>O<sub>6</sub> = oFe<sub>2</sub>SiO<sub>4</sub> + oMg<sub>2</sub>Si<sub>2</sub>O<sub>6</sub>
+'FeCaOlOpx';		oFe<sub>2</sub>SiO<sub>4</sub> + oCaFeSi<sub>2</sub>O<sub>6</sub> = oCaFeSiO<sub>4</sub> + oFe<sub>2</sub>Si<sub>2</sub>O<sub>6</sub>
+;'FeMgCaOlOpx';	oCaMgSiO<sub>4</sub> + oCaFeSi<sub>2</sub>O<sub>6</sub> = oCaFeSiO<sub>4</sub> + oCaMgSi<sub>2</sub>O<sub>6</sub>
+'MgCaOlOpx';		oMg<sub>2</sub>SiO<sub>4</sub> + oCaMgSi<sub>2</sub>O<sub>6</sub> = oCaMgSiO<sub>4</sub> + oMg<sub>2</sub>Si<sub>2</sub>O<sub>6</sub>
+;
+; 2 pyroxenes
+;
+'EnAugPig';		aMg<sub>2</sub>Si<sub>2</sub>O<sub>6</sub> = pMg<sub>2</sub>Si<sub>2</sub>O<sub>6</sub>
+'FsAugPig';		aFe<sub>2</sub>Si<sub>2</sub>O<sub>6</sub> = pFe<sub>2</sub>Si<sub>2</sub>O<sub>6</sub>
+'DiAugPig';		aCaMgSi<sub>2</sub>O<sub>6</sub> = pCaMgSi<sub>2</sub>O<sub>6</sub>
+'HdAugPig';		aCaFeSi<sub>2</sub>O<sub>6</sub> = pCaFeSi<sub>2</sub>O<sub>6</sub>
+'EnAugOpx';		aMg<sub>2</sub>Si<sub>2</sub>O<sub>6</sub> = oMg<sub>2</sub>Si<sub>2</sub>O<sub>6</sub>
+'FsAugOpx';		aFe<sub>2</sub>Si<sub>2</sub>O<sub>6</sub> = oFe<sub>2</sub>Si<sub>2</sub>O<sub>6</sub>
+'DiAugOpx';		aCaMgSi<sub>2</sub>O<sub>6</sub> = oCaMgSi<sub>2</sub>O<sub>6</sub>
+'HdAugOpx';		aCaFeSi<sub>2</sub>O<sub>6</sub> = oCaFeSi<sub>2</sub>O<sub>6</sub>
+'EnPigOpx';		pMg<sub>2</sub>Si<sub>2</sub>O<sub>6</sub> = oMg<sub>2</sub>Si<sub>2</sub>O<sub>6</sub>
+'FsPigOpx';		pFe<sub>2</sub>Si<sub>2</sub>O<sub>6</sub> = oFe<sub>2</sub>Si<sub>2</sub>O<sub>6</sub>
+'DiPigOpx';		pCaMgSi<sub>2</sub>O<sub>6</sub> = oCaMgSi<sub>2</sub>O<sub>6</sub>
+'HdPigOpx';		pCaFeSi<sub>2</sub>O<sub>6</sub> = oCaFeSi<sub>2</sub>O<sub>6</sub>
+;
+; olivine + pyroxene + quartz 
+;
+'MgOlQAug';		aMg<sub>2</sub>Si<sub>2</sub>O<sub>6</sub> = oMg<sub>2</sub>SiO<sub>4</sub> + SiO<sub>2</sub>
+'FeOlQAug';		aFe<sub>2</sub>Si<sub>2</sub>O<sub>6</sub> = oFe<sub>2</sub>SiO<sub>4</sub> + SiO<sub>2</sub>
+;'CaMgOlQAug';		aCaMgSi<sub>2</sub>O<sub>6</sub> = oCaMgSiO<sub>4</sub> + SiO<sub>2</sub>
+;'CaFeOlQAug';		aCaFeSi<sub>2</sub>O<sub>6</sub> = oCaFeSiO<sub>4</sub> + SiO<sub>2</sub>
+'MgOlQPig';		pMg<sub>2</sub>Si<sub>2</sub>O<sub>6</sub> = oMg<sub>2</sub>SiO<sub>4</sub> + SiO<sub>2</sub>
+'FeOlQPig';		pFe<sub>2</sub>Si<sub>2</sub>O<sub>6</sub> = oFe<sub>2</sub>SiO<sub>4</sub> + SiO<sub>2</sub>
+;'CaMgOlQPig';		pCaMgSi<sub>2</sub>O<sub>6</sub> = oCaMgSiO<sub>4</sub> + SiO<sub>2</sub>
+;'CaFeOlQPig';		pCaFeSi<sub>2</sub>O<sub>6</sub> = oCaFeSiO<sub>4</sub> + SiO<sub>2</sub>
+'MgOlQOpx';		oMg<sub>2</sub>Si<sub>2</sub>O<sub>6</sub> = oMg<sub>2</sub>SiO<sub>4</sub> + SiO<sub>2</sub>
+'FeOlQOpx';		oFe<sub>2</sub>Si<sub>2</sub>O<sub>6</sub> = oFe<sub>2</sub>SiO<sub>4</sub> + SiO<sub>2</sub>
+;'CaMgOlQOpx';		oCaMgSi<sub>2</sub>O<sub>6</sub> = oCaMgSiO<sub>4</sub> + SiO<sub>2</sub>
+;'CaFeOlQOpx';		oCaFeSi<sub>2</sub>O<sub>6</sub> = oCaFeSiO<sub>4</sub> + SiO<sub>2</sub>
+;
+; oxide + silicate + quartz
+;
+'FMQ';			3oFe<sub>2</sub>SiO<sub>4</sub> + O<sub>2</sub> = 2Fe3O<sub>4</sub> + 3SiO<sub>2</sub>
+'AMQ';			3aFe<sub>2</sub>Si<sub>2</sub>O<sub>6</sub> + O<sub>2</sub> = 2Fe3O<sub>4</sub> + 6SiO<sub>2</sub>
+'PMQ';			3pFe<sub>2</sub>Si<sub>2</sub>O<sub>6</sub> + O<sub>2</sub> = 2Fe3O<sub>4</sub> + 6SiO<sub>2</sub>
+'OMQ';			3oFe<sub>2</sub>Si<sub>2</sub>O<sub>6</sub> + O<sub>2</sub> = 2Fe3O<sub>4</sub> + 6SiO<sub>2</sub>
+'FHQ';			2oFe<sub>2</sub>SiO<sub>4</sub> + O<sub>2</sub> = 2Fe<sub>2</sub>O<sub>3</sub> + 2SiO<sub>2</sub>
+'AHQ';			2aFe<sub>2</sub>Si<sub>2</sub>O<sub>6</sub> + O<sub>2</sub> = 2Fe<sub>2</sub>O<sub>3</sub> + 4SiO<sub>2</sub>
+'PHQ';			2pFe<sub>2</sub>Si<sub>2</sub>O<sub>6</sub> + O<sub>2</sub> = 2Fe<sub>2</sub>O<sub>3</sub> + 4SiO<sub>2</sub>
+'OHQ';			2oFe<sub>2</sub>Si<sub>2</sub>O<sub>6</sub> + O<sub>2</sub> = 2Fe<sub>2</sub>O<sub>3</sub> + 4SiO<sub>2</sub>
+;
+; oxide + olivine + pyroxene
+;
+'FAM';			6oFe<sub>2</sub>SiO<sub>4</sub> + O<sub>2</sub> = 2Fe3O<sub>4</sub> + 3aFe<sub>2</sub>Si<sub>2</sub>O<sub>6</sub>
+'FPM';			6oFe<sub>2</sub>SiO<sub>4</sub> + O<sub>2</sub> = 2Fe3O<sub>4</sub> + 3pFe<sub>2</sub>Si<sub>2</sub>O<sub>6</sub>
+'FOM';			6oFe<sub>2</sub>SiO<sub>4</sub> + O<sub>2</sub> = 2Fe3O<sub>4</sub> + 3oFe<sub>2</sub>Si<sub>2</sub>O<sub>6</sub>
+'FAH';			4oFe<sub>2</sub>SiO<sub>4</sub> + O<sub>2</sub> = 2Fe<sub>2</sub>O<sub>3</sub> + 2aFe<sub>2</sub>Si<sub>2</sub>O<sub>6</sub>
+'FPH';			4oFe<sub>2</sub>SiO<sub>4</sub> + O<sub>2</sub> = 2Fe<sub>2</sub>O<sub>3</sub> + 2pFe<sub>2</sub>Si<sub>2</sub>O<sub>6</sub>
+'FOH';			4oFe<sub>2</sub>SiO<sub>4</sub> + O<sub>2</sub> = 2Fe<sub>2</sub>O<sub>3</sub> + 2oFe<sub>2</sub>Si<sub>2</sub>O<sub>6</sub>
+;
+; 2 oxides + silicate + quartz
+;
+'DFMQ';			oFe<sub>2</sub>SiO<sub>4</sub> + 2Fe<sub>2</sub>O<sub>3</sub> = 2Fe3O<sub>4</sub> + SiO<sub>2</sub>
+'DAMQ';			aFe<sub>2</sub>Si<sub>2</sub>O<sub>6</sub> + 2Fe<sub>2</sub>O<sub>3</sub> = 2Fe3O<sub>4</sub> + 2SiO<sub>2</sub>
+'DPMQ';			pFe<sub>2</sub>Si<sub>2</sub>O<sub>6</sub> + 2Fe<sub>2</sub>O<sub>3</sub> = 2Fe3O<sub>4</sub> + 2SiO<sub>2</sub>
+'DOMQ';			oFe<sub>2</sub>Si<sub>2</sub>O<sub>6</sub> + 2Fe<sub>2</sub>O<sub>3</sub> = 2Fe3O<sub>4</sub> + 2SiO<sub>2</sub>
+;
+; 2 oxides + olivine + pyroxene
+;
+'DFAM';			2oFe<sub>2</sub>SiO<sub>4</sub> + 2Fe<sub>2</sub>O<sub>3</sub> = 2Fe3O<sub>4</sub> + aFe<sub>2</sub>Si<sub>2</sub>O<sub>6</sub>
+'DFPM';			2oFe<sub>2</sub>SiO<sub>4</sub> + 2Fe<sub>2</sub>O<sub>3</sub> = 2Fe3O<sub>4</sub> + pFe<sub>2</sub>Si<sub>2</sub>O<sub>6</sub>
+'DFOM';			2oFe<sub>2</sub>SiO<sub>4</sub> + 2Fe<sub>2</sub>O<sub>3</sub> = 2Fe3O<sub>4</sub> + oFe<sub>2</sub>Si<sub>2</sub>O<sub>6</sub>
+;
+; 2 oxides + rutile
+;
+'SpIlRut';		TiO<sub>2</sub> + Fe<sub>2</sub>TiO<sub>4</sub> = 2FeTiO<sub>3</sub>
+;
+; 2 oxides + iron
+;
+'SpIlFe';			2FeTiO<sub>3</sub> + 2Fe + O<sub>2</sub> = 2Fe<sub>2</sub>TiO<sub>4</sub>
+;
+; oxide + iron + rutile
+;
+'IlFeRut';		2Fe + 2TiO<sub>2</sub> + O<sub>2</sub> = 2FeTiO<sub>3</sub>
+'SpFeRut';		2Fe + TiO<sub>2</sub> + O<sub>2</sub> = Fe<sub>2</sub>TiO<sub>4</sub>
+;
+; silicate + iron + quartz
+;
+'OlFeQtz';		2Fe + SiO<sub>2</sub> + O<sub>2</sub> = oFe<sub>2</sub>SiO<sub>4</sub>
+'AugFeQtz';		2Fe + 2SiO<sub>2</sub> + O<sub>2</sub> = aFe<sub>2</sub>Si<sub>2</sub>O<sub>6</sub>
+'PigFeQtz';		2Fe + 2SiO<sub>2</sub> + O<sub>2</sub> = pFe<sub>2</sub>Si<sub>2</sub>O<sub>6</sub>
+'OpxFeQtz';		2Fe + 2SiO<sub>2</sub> + O<sub>2</sub> = oFe<sub>2</sub>Si<sub>2</sub>O<sub>6</sub>
+</listing>
+
+<p>Notes:  In the abbreviations of the left column, Fe, Mg, Ca, Ti are cations; Ol, Opx, Aug, Pig are Ca-Mg-Fe olivine, orthopyroxene, augite, and pigeonite; Sp and Il are Fe-Mg-Mn-Ti spinel (Ti-magnetite) and ilmenite.  In redox and displaced (D) equilibria, F is fayalite end-member; O, P, and A refer to Fe<sub>2</sub>Si<sub>2</sub>O<sub>6</sub> component in orthopyroxene, pigeonite, and augite, respectively.  Q and Rut are quartz and rutile or the equivalent components; M and H refer to Fe3O<sub>4</sub> and Fe<sub>2</sub>O<sub>3</sub> components in spinel and ilmenite, respectively.  En, Fs, Di, and Hd are the pyroxene end-members Mg<sub>2</sub>Si<sub>2</sub>O<sub>6</sub>, Fe<sub>2</sub>Si<sub>2</sub>O<sub>6</sub>, CaMgSi<sub>2</sub>O<sub>6</sub>, and CaFeSi<sub>2</sub>O<sub>6</sub>.  Fe is metallic iron or its component.</p>
+
+<p>In the formulas, prefix o for an olivine formula [M2SiO<sub>4</sub>] indicates olivine; prefixes o, a, p before pyroxene end member formulas indicate that component in Opx, augite, or pigeonite, respectively.  Fe<sub>2</sub>O<sub>3</sub>, FeTiO<sub>3</sub>, and MgTiO<sub>3</sub> are components of ilmenite; Fe3O<sub>4</sub>, Fe<sub>2</sub>TiO<sub>4</sub>, and MgFe<sub>2</sub>O<sub>4</sub> are components of spinel (Ti-magnetite). <p>
+
+<p>The 11 reactions or equilibria preceded by ; are redundant and thus ignored by the program; they are listed here for completeness.</p>
+
+
+
+<h2><a name="definitions">Names, Definitions, and Limits for Input Variables Used in QUIlF</a></h2>
+<table>
+<tr><td>Variable</td><td>Definition</td><td>Input</td><td>Limits</td></tr>
+<tr><td>T(C)</td><td>Temperature in Celsius</td><td>400</td><td>1500</td></tr>
+<tr><td>P</td><td>Pressure in bars</td><td>0</td><td>32767</td></tr>
+<tr><td>fO<sub>2</sub></td><td>Log10 oxygen fugacity</td><td>-30</td><td>-6</td></tr>
+<tr><td>NTi</td><td>Number of Ti in spinel (3 cations/4 oxygens)</td><td>0</td><td>1</td></tr>
+<tr><td>NMg</td><td>Number of Mg in spinel (3 cations/4 oxygens)</td><td>0</td><td>2</td></tr>
+<tr><td>NMn</td><td>Number of Mn in spinel (3 cations/4 oxygens)</td><td>0</td><td>2</td></tr>
+<tr><td>XGk</td><td>MgTiO<sub>3</sub>/(Fe<sub>2</sub>O<sub>3</sub> + FeTiO<sub>3</sub> + MgTiO<sub>3</sub>) in ilmenite</td><td>0</td><td>1</td></tr>
+<tr><td>XHem</td><td>Fe<sub>2</sub>O<sub>3</sub>/(Fe<sub>2</sub>O<sub>3</sub> + FeTiO<sub>3</sub> + MgTiO<sub>3</sub>) in ilmenite</td><td>0</td><td>1</td></tr>
+<tr><td>XFo</td><td>Fo/(Fo + Fa + La) in olivine</td><td>0</td><td>1 - XLa    </td></tr>
+<tr><td>XLa</td><td>La/(Fo + Fa + La) in olivine</td><td>0</td><td>0.5</td></tr>
+<tr><td>XEn</td><td>En/(En + Fs + Wo) in augite or pigeonite</td><td>0</td><td>1 - XWo</td></tr>
+<tr><td>XWo</td><td>Wo/(En + Fs + Wo) in augite or pigeonite</td><td>0</td><td>0.5</td></tr>
+<tr><td>XEn</td><td>En/(En + Fs + Wo) in orthopyroxene</td><td>0</td><td>1 - XWo</td></tr>
+<tr><td>XWo</td><td>Wo/(En + Fs + Wo) in orthopyroxene</td><td>0</td><td>0.5</td></tr>
+<tr><td>SiO<sub>2</sub></td><td>Activity of SiO<sub>2</sub>, relative to quartz at P,T</td><td>0</td><td>1</td></tr>
+<tr><td>Fe </td><td>Activity of Feo, relative to pure Fe at P,T</td><td>0</td><td>1</td></tr>
+<tr><td>TiO<sub>2</sub> </td><td>Activity of TiO<sub>2</sub>, relative to rutile at P,T</td><td>0</td><td>1</td></tr>
+<tr><td>CaTiSiO5</td><td>Activity of CaTiSiO5, relative to titanite at P,T</td><td>0</td><td>1</td></tr>
+</table>
+<p>Other terms that cannot be input:</p>
+<table>
+<tr><td>DFMQ</td><td>log fO<sub>2</sub> relative to FMQ buffer at P,T</td></tr>
+<tr><td>Xil</td><td>FeTiO<sub>3</sub>/(Fe<sub>2</sub>O<sub>3</sub> + FeTiO<sub>3</sub> + MgTiO<sub>3</sub> + MnTiO<sub>3</sub>) in ilmenite </td></tr>
+<tr><td>XFe</td><td>Fe<sup>2+</sup>/(Mg + Fe<sup>2+</sup>) in olivine or the pyroxene</td></tr>
+<tr><td>XFa</td><td>1 - XFo - XLa in olivine</td></tr>
+<tr><td>XFs</td><td>1 - XEn - XWo in pyroxene</td></tr>
+</table>
+<p>No compositions are in weight units. </p>
+
+
+
+<h2><a name="errormessages">Error Messages and Prompts</a></h2>
+<table>
+<tr><td>An output file must be specified</td><td>
+A valid DOS filename must be entered.</td></tr>
+
+<tr><td>Calculations halted</td><td>
+The Escape key was pressed, terminating the calculations.</td></tr>
+
+<tr><td>Cannot find file FILENAME</td><td>
+Error # in opening file FILENAME</td></tr>
+
+<tr><td>Error in Activities of NAME</td><td>
+The program is unable to calculate the activites of NAME. Either the temperature or  pressure is outside of the valid range, or the calculation of the site occupancies failed to converge.</td></tr>
+
+<tr><td>Error in calculating the derivatives</td><td>
+The temperature or pressure has reached a value that is outside of the valid range.</td></tr>
+
+<tr><td>Error in Standard State Routines</td><td>
+The temperature or pressure has reached a value that is outside of the valid range.</td></tr>
+
+<tr><td>Error reading file: FILENAME</td><td>
+A DOS error has occured in reading the file. Either the file doesn't exist or a hardware fault has
+occured.</td></tr>
+
+<tr><td>Error writing file: FILENAME</td><td>
+A DOS error has occured in writing the file. Either a hardware fault has occured or the disk is full.</td></tr>
+
+<tr><td>LSQ Error</td><td>
+The matrix inversion routine has failed. The matrix is singular and can't be inverted.</td></tr>
+
+<tr><td>Missing ) in LINE</td><td>
+A right parens is needed in LINE.</td></tr>
+
+<tr><td>Missing * in LINE</td><td>
+An astericks is needed in LINE.</td></tr>
+
+<tr><td>Missing ; in:LINE</td><td>
+A semicolon is needed after the reaction name.</td></tr>
+
+<tr><td>Missing reaction in:LINE</td><td>
+There is no name for the reaction.</td></tr>
+
+<tr><td>No Reactions have been selected</td><td>
+Select reactions before finding a LSQ model or there are no reactions corresponding the variables that have been chosed.</td></tr>
+
+<tr><td>No selected reactions</td><td>
+No reactions are possible with the chosen set of variables.</td></tr>
+
+<tr><td>No variables</td><td>
+At least one parameter must be variable for a LSQ solution.</td></tr>
+
+<tr><td>Not enough independent reactions</td><td>
+There are more variables than there are reactions. A LSQ solution is not possible.</td></tr>
+
+<tr><td>Not enough memory to complete operation</td><td>
+There is insufficient memory to do what was selected.</td></tr>
+
+<tr><td>Syntax error: missing components LINE</td><td>
+A syntax error in the file QUILF.RCT. The reaction must specify the name of appropriate components.</td></tr>
+
+<tr><td>Temperature/pressure outside of allowable range</td><td>
+The temperature or pressure has exceeded the allowable limits of the standard state values.</td></tr>
+
+<tr><td>The current solution is no longer valid</td><td>
+In order to test the reactions, the solution must be current. The compositions have been changed since the model was calculated.</td></tr>
+
+<tr><td>The file FILENAME will be overwritten</td><td>
+The file FILENAME already exists in the current directory.</td></tr>
+
+<tr><td>The NAME must be alphanumeric characters</td><td>
+The reaction name can only be composed of letters and digits.</td></tr>
+
+<tr><td>The reaction name NAME is too long</td><td>
+The name of the reaction is too long. Shorten it.</td></tr>
+
+<tr><td>The temperature and pressure must be specified</td><td>
+Initial values for temperature and pressure must be specified.</td></tr>
+
+<tr><td>The value of NAME can't be changed</td><td>
+Should not happen. The identifier of a cell has been edited.</td></tr>
+
+<tr><td>Too many components in the reaction:LINE</td><td>
+The reaction has too many components. The maximum is four.</td></tr>
+
+<tr><td>Too Many For/Next Variables The maximum is #</td><td>
+There are too many for/next variables.</td></tr>
+
+<tr><td>Too many iterations (#)</td><td>
+The solution failed to converge within a reasonable number of iterations. Start the solution with values closer to the calculated values or set more compositions constant.</td></tr>
+
+<tr><td>Too many reactions</td><td>
+There are too many reactions possible between the current variables.</td></tr>
+
+<tr><td>Too many reactions (#) in the file MaxAvail # MemAvail #</td><td>
+The file QUILF.RCT has too many reactions for the available amount of memory.</td></tr>
+
+<tr><td>Too many variables maximum is #</td><td>
+You are trying too solve for too many compositions at once.</td></tr>
+
+<tr><td>Too many variables (#) not enough reactions (#)</td><td>
+A model can't be calculated if the number of independent reactions is less than the number of variables.</td></tr>
+
+<tr><td>Unknown component: NAME</td><td>
+The file QUILF.RCT has been edited. NAME is not a valid component.</td></tr>
+
+<tr><td>Unknown error reading file: FILENAME</td><td>
+An unknown DOS error has occured. </td></tr>
+
+<tr><td>The file FILENAME does not exist in the current drive.</td><td>
+A Dos Error has occured (error number #).</td></tr>
+</table>
+
+
+
+<h2><a name="menus">Menus</a></h2>
+
+<a href="#filemenu">File</a>
+<a href="#lsqmenu">LSQ</a>
+<a href="#editmenu">Edit</a>
+<a href="#viewmenu">View</a>
+<a href="#helpmenu">Help</a>
+
+<h3><a name="#filemenu">File Menu</a></h3>
+<table>
+<tr><td>
+Clear </td><td> clear the current values, resets everything to the initial values</td></tr>
+<tr><td>Open</td><td> open an existing file</td></tr>
+<tr><td>Save</td><td> save the current file with the current name</td></tr>
+<tr><td>Save As</td><td> save the current file with a new name</td></tr>
+<tr><td>Print</td><td> dump the screen to the printer</td></tr>
+<tr><td>Page Setup</td><td> set margins,  header,  number of worksheets per printed page</td></tr>
+<tr><td>Printer Setup</td><td> select a printer</td></tr>
+<tr><td>Exit</td><td> leave the program</td></tr>
+</table>
+
+
+<h3><a name="lsqmenu">LSQ menu</a></h3>
+<table>
+<tr><td>abort</td><td> aborts the calculations (disabled under Windows 3.1)</td></tr>
+<tr><td>Echo</td><td> saves the calculations to a file as they are generated</td></tr>
+<tr><td>Start</td><td> starts a least squares solution</td></tr>
+<tr><td>Watch</td><td> displays intermediate values</td></tr>
+</table>
+
+<h3><a name="editmenu">Edit Menu</a></h3>
+<table>
+<tr><td>Copy</td><td> copies the current screen to the clipboard</td></tr>
+<tr><td>Select Axes</td><td> choose which variables to plot</td></tr>
+<tr><td>Select Colors</td><td> choose the colors for the display (printing is always in black and white)</td></tr>
+<tr><td>Select Font</td><td> changes the font / size of characters for the current window</td></tr>
+<tr><td>Weight Percent</td><td> allows weight percent values to be entered, calculates components</td></tr>
+<tr><td>Select Reactions</td><td> allows a subset of reactions to be chosen</td></tr>
+</table>
+
+<h3><a name="viewmenu">View Menu</a></h3>
+<table>
+<tr><td>Activitiies</td><td> shows the activities of the phases under the current conditions</td></tr>
+<tr><td>Graph</td><td> graphs the Temperature vs. DFMQ, best used with For/Next loops</td></tr>
+<tr><td>Reactions</td><td> shows the selected set of reactions</td></tr>
+<tr><td>Solution</td><td> shows the current solution values</td></tr>
+<tr><td>Test</td><td> displays the calculated values for the Delta-G of reaction,<br/>
+  and the ln(k) values for the activities. Can be used to determine<br/>
+  how close the calculated values and the solution agree.</td></tr>
+</table>
+<h3><a name="helpmenu">Help Menu</a></h3>
+<table>
+<tr><td>Contents</td><td> displays the contents of the help file</td></tr>
+<tr><td>Help on Help</td><td> windows help</td></tr>
+<tr><td>Whats new</td><td> What has changed in this version</td></tr>
+<tr><td>About</td><td> who wrote the program, version number</td></tr>
+</table>
+
+
+
+<h2><a name="whatsnew">What's New</a></h2>
+<p>This sections details what's changed from the Windows version to the java version.</p>
+<ul>
+<li>From the LSQ meny, the Abort, Echo and Watch options have been removed as they are no longer needed.</li>
+<li>From the Edit menu the Copy, Select Colors, Select Font have been removed.</li>
+<li>A Data option has been added to the View menu. From here the final calculations are recorded and the table can be exported to a Excel file.
+<li>The help section (this file) has been redone from the Window help format to HTML.
+<li>Karooite has been added.
+</ul>
+<p>This sections details what's changed from the DOS version to the Windows Version.</p>
+<ul>
+<li> Most of the function keys are not implemented, only F1 (help) and F2 (start the least squares calculation) work.</li>
+
+<li>Printing the screen has not been implemented.</li>
+
+<li>the <a href="#menus">menus</a> themselves have changed, mostly in their organization.</li>
+
+<li>From the <a href="#editmenu">Edit</a> menu, the screen can be copied to the clipboard. This can then be pasted into other programs like a word processor. The reverse operation, pasting from the clipboard into the program, isn't supported. Formating may be strange, especially if  the  word processor is using a proportional font.</li>
+
+<li> The calculations can't be stopped once started (for Windows 3.1, this is a Windoze program). You have to wait for the program to finish whatever it is doing. The <a href="#titlepage">authors</a> would like to know if you do find a set of input compositions that set the program into an infinite loop.</li>
+
+<li> Titanite has been added as a pure phase. Like quartz, the activity can be set from 0 to 1, or solved for as an unknown.</li>
+
+<li> A graphing window (Window - <a href="#graphing">Graph</a>) has been added. This allows you to see a Temperature vs. DFMQ graph as the values are calculated. This works best with <a href="#enteringdata">For/Next</a> type loops</li>
+
+<li>The input temperature is now in Celsius instead of Kelvin.</li>
+
+<li>The axes for the graphing window can now be changed.</li>
+
+<li>The font and screen color is user selectable.</li>
+
+<li> The Windows 95 version is multithreaded, so the calculations can interupted, and it includes a button bar.</li>
+</ul>
+#this has not been implemented
+
+<h3><a name="olwtpt">Olivine Weight Percent</a></h3>
+
+<p>Weight Percent - Enter the weight percent values for the various oxides. Move to the next with the Tab key or a mouse. Currently only SiO<sub>2</sub>, FeO, MnO, MgO and CaO can be entered</p>
+
+<p>Formula - the calculated formula based on 4 oxygens</p>
+
+<p>For Geothermometry</p>
+<ul>
+<li>Mole Fraction</li>
+<ul>
+<li>Fo	= Mg / (Mg + Fe<sup>2+</sup>)</li>
+<li>Fa	= Fe<sup>2+</sup> / (Mg + Fe<sup>2+</sup>)</li>
+</ul>
+<li>For QUILF</li>
+<ul>
+<li>XFo	= Mg / (Mg + Fe<sup>2+</sup> + Ca)</li>
+<li>XFa	= Fe<sup>2+</sup> / (Mg + Fe<sup>2+</sup> + Ca)</li>
+<li>XLa	= Ca / (Mg + Fe<sup>2+</sup> + Ca)</li>
+</ul>
+<li>Buttons</li>
+<ul>
+<li>OK		- accept the values and return the values of 
+				XFo, XFa and XLa  to the main program </li>
+<li>Cancel		- ignore the changes and return to the main program</li>
+<li>Help		- this screen</li>
+<li>Clear		- clear all the values</li>
+<li>Formula	- calculate the formula based on the weight percent values</li>
+</ul>
+</ul>
+
+<h3><a name="pxwtpt">Pyroxene Weight Percent</a></h3>
+
+<p>Weight Percent - Enter the weight percent values for the various oxides. Move to the next with the Tab key or a mouse. Currently only SiO<sub>2</sub>, Al<sub>2</sub>O<sub>3</sub>, TiO<sub>2</sub>, Fe<sub>2</sub>O<sub>3</sub>, FeO, MnO, MgO, Cr2O<sub>3</sub>, CaO and Na2O can be entered</p>
+
+<p>Formula - the calculated formula based on 4 cations per 6 oxygens. If  Fe<sub>2</sub>O<sub>3</sub> is left blank, then the program will calculate a value based on charge balance. If  Fe<sub>2</sub>O<sub>3</sub> is truly zero, then set it to 0.</p>
+<p>For Geothermometry</p>
+<ul>
+<li>Mole Fraction</li>
+<ul>
+<li>	Ca	= Ca / (Mg + Fe<sup>2+</sup> + Ca)</li>
+<li>	Mg	= Mg / (Mg + Fe<sup>2+</sup> + Ca)</li>
+<li>	Fe	= Fe<sup>2+</sup> / (Mg + Fe<sup>2+</sup> + Ca)</li>
+</ul>
+<li>For QUILF </li>
+<ul>
+<li>	XEn	= How these are calculated depends on the type of pyroxene.</li>
+<li>	XWo	= Augite, Pigeonite and Orthopyroxene are treated differently.</li>
+<li>	XFs	= The projection scheme used is documented more fully in
+		Lindsley and Andersen (1983)references</li>
+</ul>
+<li>Buttons </li>
+<ul>
+<li>	OK		- accept the values and return the values of
+				XEn, XWo and XFs  to the main program  </li>
+<li>	Cancel		- ignore the changes and return to the main program </li>
+<li>	Help		- this screen </li>
+<li>	Clear		- clear all the values </li>
+<li>	Formula	- calculate the formula based on the weight percent values </li>
+</ul>
+</ul>
+<h3><a name="ilwtpt">Ilmenite Weight Percent</a></h3>
+
+Weight Percent - Enter the weight percent values for the various oxides. Move to the next with the Tab key or a mouse. Currently only Al<sub>2</sub>O<sub>3</sub>, TiO<sub>2</sub>,  Fe<sub>2</sub>O<sub>3</sub>,  FeO, MnO  and  MgO can be entered
+
+Formula - the calculated formula based on a total of 2 cations and 3 oxygens. If  Fe<sub>2</sub>O<sub>3</sub> is omitted (left blank), then the program will calculate a value for it.  If it is truly zero, then 0 must be entered.
+
+<p>For Geothermometry</p>
+<ul>
+<li>Mole Fraction</li>
+<ul>
+<li>	Ilm	= XIl / (XIl + XHem)		as calculated below</li>
+<li>	Hem	= XHem / (XIl + XHem)</li>
+</ul>
+<li>For QUILF (on the basis of the mineral formula)</li>
+<ul>
+<li>	XHem	= (1/2)(Fe<sup>2+</sup> + Fe<sup>3+</sup> - Ti + Mg + Mn) / sum</li>
+<li>	XGk	= Mg / sum</li>
+<li>	XPy	= Mn / sum<br/>
+	where XIl = (Ti - Mg - Mn + Al/2) / sum<br/>
+	and  sum = XHem + XGk + XPy + XIl</li>
+</ul>
+<li>Buttons</li>
+<ul>
+<li>	OK		- accept the values and return the values of 
+				XHem, XGk and XPy  to the main program </li>
+<li>	Cancel		- ignore the changes and return to the main program</li>
+<li>	Help		- this screen</li>
+<li>	Clear		- clear all the values</li>
+<li>	Formula	- calculate the formula based on the weight percent values</li>
+</ul>
+</ul>
+<h3><a name="spwtpt">Spinel Weight Percent</a></h3>
+
+<p>Weight Percent - Enter the weight percent values for the various oxides. Move to the next with the Tab key or a mouse. Currently only Al<sub>2</sub>O<sub>3</sub>, TiO<sub>2</sub>,  Fe<sub>2</sub>O<sub>3</sub>,  FeO, MnO  and  MgO  can be entered</p>
+
+<p>Formula - the calculated formula based on 4 oxygens</p>
+
+<p>For Geothermometry</p>
+<ul>
+<li>Mole Fraction</li>
+<ul>
+<li>	Usp	= (Ti - (Mg + Mg / (Mg + Fe<sup>2+</sup>) * Al / 2) / 2 - Mn / 2) /  ((1/2)Fe<sup>3+</sup> + Ti - Mn / 2)</li>
+<li>	Mt	= (1/2)Fe<sup>3+</sup> / ((1/2)Fe<sup>3+</sup> + Ti - Mn / 2)</li>
+</ul>
+<li>For QUILF</li>
+<ul>
+<li>	NTi	= the number of Ti cations per 4 oxygens</li>
+<li>	NMg	= the number of Mg cations per 4 oxygens - Mg / (Mg + Fe<sup>2+</sup>)*Al</li>
+<li>	NMn	= number of Mn cations per 4 oxygens</li>
+</ul>
+<li>Buttons</li>
+<ul>
+<li>	OK		- accept the values and return the values of 
+				NTi, NMg and NMn to the main program </li>
+<li>	Cancel		- ignore the changes and return to the main program</li>
+<li>	Help		- this screen</li>
+<li>	Clear		- clear all the values</li>
+<li>	Formula	- calculate the formula based on the weight percent values</li>
+</ul>
+</ul>
+<h2><a name="graphing">Graphing</a></h2>
+
+<p>Graphs of Temperature vs. Delta FMQ can be drawn from the calculated values. As the program calculates a new set of compositions the program can plot them on the graph. If individual trials are made then these will be plotted as individual points. If For/Next loops are used, then the program will draw the individual trials as a series of lines. For example if NTi is set to vary from 0.1,0.5,0.1 and XHem is set to vary from 0.01, 0.1,0.1 then 10 lines will be drawn. Each with a constant value for XHem.</p>
+
+<p>Currently, the order in which the program calculates solutions can't be varied, so it is not possible to draw curves at constant NTi unless each curve is done separately.</p>
+
+See also<ul>
+<li><a href="graphsettings">Settings</a></li>
+</ul>
+<h3><a name="graphsettings">Graph, Settings</a></h3>
+<ul>
+<li>Title</li>
+<ul>
+<li>Enter a title, this will be displayed at the top of the window</li>
+</ul>
+<li>X Axis</li>
+<ul>
+<li>	Label		- what is drawn along the X axis (default:T(C))</li>
+<li>	Minimum	- the minimum value to plot (default:400)</li>
+<li>	Maximum	- the maximum value to plot (default:1500)</li>
+<li>	Tic Interval	- the spacing of the X values (default:100)</li>
+<li>	Format		- how the numbers will be displayed</li>
+<li>	Width		- the width of the numbers for the X axis (default:5)</li>
+<li>	Decimals	- the number of decimal places in the X axis (default:0)</li>
+</ul>
+<li>Y Axis</li>
+<ul>
+<li>	Label		- what is drawn along the Y axis (default:DFMQ)</li>
+<li>	Minimum	- the minimum value to plot (default:-6)</li>
+<li>	Maximum	- the maximum value to plot (default:5)</li>
+<li>	Tic Interval	- the spacing of the Y values (default:1)</li>
+<li>	Format		- how the numbers will be displayed</li>
+<li>	Width		- the width of the numbers for the Y axis (default:4)</li>
+<li>	Decimals	- the number of decimal places in the Y axis (default:1)</li>
+</ul>
+<li>Buttons</li>
+<ul>
+<li>	OK		- accept the settings and redraw the graph</li>
+<li>	Cancel		- ignore the changes made and close the dialog</li>
+<li>	Help		- this page</li>
+<li>	Defaults	- restore the fields to the default settings</li>
+</ul>
+</ul>
+see also <ul>
+<li><a href="graphing">Graph</li></ul>
+
+
+</body>
+</html>
+
+
