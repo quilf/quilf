@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Main-Class: edu.sunysb.ess.quilf.swing.Quilf
+Class-Path: lib/log4j.jar  lib/jxl.jar  lib/jlfgr-1_0.jar
+

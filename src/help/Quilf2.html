@@ -1,0 +1,141 @@
+﻿#$K+Olivine Weight Percent
+
+Weight Percent - Enter the weight percent values for the various oxides. Move to the next with the Tab key or a mouse. Currently only SiO2, FeO, MnO, MgO and CaO can be entered
+
+Formula - the calculated formula based on 4 oxygens
+
+For Geothermometry
+Mole Fraction
+	Fo	= Mg / (Mg + Fe2+)
+	Fa	= Fe2+ / (Mg + Fe2+)
+
+For QUILF
+	XFo	= Mg / (Mg + Fe2+ + Ca)
+	XFa	= Fe2+ / (Mg + Fe2+ + Ca)
+	XLa	= Ca / (Mg + Fe2+ + Ca)
+
+Buttons
+	OK		- accept the values and return the values of 
+				XFo, XFa and XLa  to the main program 
+	Cancel		- ignore the changes and return to the main program
+	Help		- this screen
+	Clear		- clear all the values
+	Formula	- calculate the formula based on the weight percent values
+
+
+#$K+Pyroxene Weight Percent
+
+Weight Percent - Enter the weight percent values for the various oxides. Move to the next with the Tab key or a mouse. Currently only SiO2, Al2O3, TiO2, Fe2O3, FeO, MnO, MgO, Cr2O3, CaO and Na2O can be entered
+
+Formula - the calculated formula based on 4 cations per 6 oxygens. If  Fe2O3 is left blank, then the program will calculate a value based on charge balance. If  Fe2O3 is truly zero, then set it to 0.
+
+For Geothermometry
+Mole Fraction
+	Ca	= Ca / (Mg + Fe2+ + Ca)
+	Mg	= Mg / (Mg + Fe2+ + Ca)
+	Fe	= Fe2+ / (Mg + Fe2+ + Ca)
+
+For QUILF
+	XEn	= How these are calculated depends on the type of pyroxene.
+	XWo	= Augite, Pigeonite and Orthopyroxene are treated differently.
+	XFs	= The projection scheme used is documented more fully in
+		Lindsley and Andersen (1983)references
+
+Buttons
+	OK		- accept the values and return the values of 
+				XEn, XWo and XFs  to the main program 
+	Cancel		- ignore the changes and return to the main program
+	Help		- this screen
+	Clear		- clear all the values
+	Formula	- calculate the formula based on the weight percent values
+
+#$K+Ilmenite Weight Percent
+
+Weight Percent - Enter the weight percent values for the various oxides. Move to the next with the Tab key or a mouse. Currently only Al2O3, TiO2,  Fe2O3,  FeO, MnO  and  MgO can be entered
+
+Formula - the calculated formula based on a total of 2 cations and 3 oxygens. If  Fe2O3 is omitted (left blank), then the program will calculate a value for it.  If it is truly zero, then 0 must be entered.
+
+For Geothermometry
+Mole Fraction
+	Ilm	= XIl / (XIl + XHem)		as calculated below
+	Hem	= XHem / (XIl + XHem)
+
+For QUILF (on the basis of the mineral formula)
+	XHem	= (1/2)(Fe2+ + Fe3+ - Ti + Mg + Mn) / sum
+	XGk	= Mg / sum
+	XPy	= Mn / sum
+
+	where XIl = (Ti - Mg - Mn + Al/2) / sum	
+	and  sum = XHem + XGk + XPy + XIl
+
+Buttons
+	OK		- accept the values and return the values of 
+				XHem, XGk and XPy  to the main program 
+	Cancel		- ignore the changes and return to the main program
+	Help		- this screen
+	Clear		- clear all the values
+	Formula	- calculate the formula based on the weight percent values
+
+#$K+Spinel Weight Percent
+
+Weight Percent - Enter the weight percent values for the various oxides. Move to the next with the Tab key or a mouse. Currently only Al2O3, TiO2,  Fe2O3,  FeO, MnO  and  MgO  can be entered
+
+Formula - the calculated formula based on 4 oxygens
+
+For Geothermometry
+Mole Fraction
+	Usp	= (Ti - (Mg + Mg / (Mg + Fe2+) * Al / 2) / 2 - Mn / 2) /  ((1/2)Fe3+ + Ti - Mn / 2)
+	Mt	= (1/2)Fe3+ / ((1/2)Fe3+ + Ti - Mn / 2)
+
+For QUILF
+	NTi	= the number of Ti cations per 4 oxygens
+	NMg	= the number of Mg cations per 4 oxygens - Mg / (Mg + Fe2+)*Al
+	NMn	= number of Mn cations per 4 oxygens
+
+Buttons
+	OK		- accept the values and return the values of 
+				NTi, NMg and NMn to the main program 
+	Cancel		- ignore the changes and return to the main program
+	Help		- this screen
+	Clear		- clear all the values
+	Formula	- calculate the formula based on the weight percent values
+
+#$K+Graphing
+
+	Graphs of Temperature vs. Delta FMQ can be drawn from the calculated values. As the program calculates a new set of compositions the program can plot them on the graph. If individual trials are made then these will be plotted as individual points. If For/Next loops are used, then the program will draw the individual trials as a series of lines. For example if NTi is set to vary from 0.1,0.5,0.1 and XHem is set to vary from 0.01, 0.1,0.1 then 10 lines will be drawn. Each with a constant value for XHem.
+
+	Currently, the order in which the program calculates solutions can't be varied, so it is not possible to draw curves at constant NTi unless each curve is done separately.
+
+See also Settingsgraphsettings
+
+#$K+Graph, Settings
+
+Title
+	Enter a title, this will be displayed at the top of the window
+
+X Axis
+	Label		- what is drawn along the X axis (default:T(C))
+	Minimum	- the minimum value to plot (default:400)
+	Maximum	- the maximum value to plot (default:1500)
+	Tic Interval	- the spacing of the X values (default:100)
+	Format		- how the numbers will be displayed
+	Width		- the width of the numbers for the X axis (default:5)
+	Decimals	- the number of decimal places in the X axis (default:0)
+
+Y Axis
+	Label		- what is drawn along the Y axis (default:DFMQ)
+	Minimum	- the minimum value to plot (default:-6)
+	Maximum	- the maximum value to plot (default:5)
+	Tic Interval	- the spacing of the Y values (default:1)
+	Format		- how the numbers will be displayed
+	Width		- the width of the numbers for the Y axis (default:4)
+	Decimals	- the number of decimal places in the Y axis (default:1)
+
+Buttons
+	OK		- accept the settings and redraw the graph
+	Cancel		- ignore the changes made and close the dialog
+	Help		- this page
+	Defaults	- restore the fields to the default settings
+
+see also Graphgraphing
+

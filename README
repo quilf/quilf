@@ -1,0 +1,9 @@
+This is a java version of the QUILF source code (
+QUILF: A pascal program to assess equilibria among Fe-Mg-Mn-Ti oxides, pyroxenes, olivine, and quartz
+David J.Andersen, Donald H.Lindsley, and Paula M.Davidson)
+
+Main-Class: edu.sunysb.ess.quilf.swing.Quilf
+
+It requires the followig libraries to be placed in the lib directory:
+log4j.jar, jxl.jar, and jlfgr-1_0.jar
+

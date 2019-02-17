@@ -1,0 +1,40 @@
+<html>
+<head>
+<title>QUILF - Names, Definitions, and Limits for Input Variables Used in QUIlF</title>
+</head>
+<body>
+<h2><a name="definitions">Names, Definitions, and Limits for Input Variables Used in QUIlF</a></h2>
+<table>
+<tr><td>Variable</td><td>Definition</td><td>Input</td><td>Limits</td></tr>
+<tr><td>T(C)</td><td>Temperature in Celsius</td><td>400</td><td>1500</td></tr>
+<tr><td>P</td><td>Pressure in bars</td><td>0</td><td>32767</td></tr>
+<tr><td>fO<sub>2</sub></td><td>Log10 oxygen fugacity</td><td>-30</td><td>-6</td></tr>
+<tr><td>NTi</td><td>Number of Ti in spinel (3 cations/4 oxygens)</td><td>0</td><td>1</td></tr>
+<tr><td>NMg</td><td>Number of Mg in spinel (3 cations/4 oxygens)</td><td>0</td><td>2</td></tr>
+<tr><td>NMn</td><td>Number of Mn in spinel (3 cations/4 oxygens)</td><td>0</td><td>2</td></tr>
+<tr><td>XGk</td><td>MgTiO<sub>3</sub>/(Fe<sub>2</sub>O<sub>3</sub> + FeTiO<sub>3</sub> + MgTiO<sub>3</sub>) in ilmenite</td><td>0</td><td>1</td></tr>
+<tr><td>XHem</td><td>Fe<sub>2</sub>O<sub>3</sub>/(Fe<sub>2</sub>O<sub>3</sub> + FeTiO<sub>3</sub> + MgTiO<sub>3</sub>) in ilmenite</td><td>0</td><td>1</td></tr>
+<tr><td>XFo</td><td>Fo/(Fo + Fa + La) in olivine</td><td>0</td><td>1 - XLa    </td></tr>
+<tr><td>XLa</td><td>La/(Fo + Fa + La) in olivine</td><td>0</td><td>0.5</td></tr>
+<tr><td>XEn</td><td>En/(En + Fs + Wo) in augite or pigeonite</td><td>0</td><td>1 - XWo</td></tr>
+<tr><td>XWo</td><td>Wo/(En + Fs + Wo) in augite or pigeonite</td><td>0</td><td>0.5</td></tr>
+<tr><td>XEn</td><td>En/(En + Fs + Wo) in orthopyroxene</td><td>0</td><td>1 - XWo</td></tr>
+<tr><td>XWo</td><td>Wo/(En + Fs + Wo) in orthopyroxene</td><td>0</td><td>0.5</td></tr>
+<tr><td>SiO<sub>2</sub></td><td>Activity of SiO<sub>2</sub>, relative to quartz at P,T</td><td>0</td><td>1</td></tr>
+<tr><td>Fe </td><td>Activity of Feo, relative to pure Fe at P,T</td><td>0</td><td>1</td></tr>
+<tr><td>TiO<sub>2</sub> </td><td>Activity of TiO<sub>2</sub>, relative to rutile at P,T</td><td>0</td><td>1</td></tr>
+<tr><td>CaTiSiO5</td><td>Activity of CaTiSiO5, relative to titanite at P,T</td><td>0</td><td>1</td></tr>
+</table>
+<p>Other terms that cannot be input:</p>
+<table>
+<tr><td>DFMQ</td><td>log fO<sub>2</sub> relative to FMQ buffer at P,T</td></tr>
+<tr><td>Xil</td><td>FeTiO<sub>3</sub>/(Fe<sub>2</sub>O<sub>3</sub> + FeTiO<sub>3</sub> + MgTiO<sub>3</sub> + MnTiO<sub>3</sub>) in ilmenite </td></tr>
+<tr><td>XFe</td><td>Fe<sup>2+</sup>/(Mg + Fe<sup>2+</sup>) in olivine or the pyroxene</td></tr>
+<tr><td>XFa</td><td>1 - XFo - XLa in olivine</td></tr>
+<tr><td>XFs</td><td>1 - XEn - XWo in pyroxene</td></tr>
+</table>
+<p>No compositions are in weight units. </p>
+
+
+</body>
+</html>

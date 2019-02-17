@@ -1,0 +1,28 @@
+package edu.sunysb.ess.quilf.graph;
+/*
+part of QUIlF
+Copyright (c) 1998,2008 by David Andersen
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+*/
+public class TGraph {
+	public static final int MAXSPLINE = 200; /* max points to define smoothed curve */
+	public static final double ZERO = 1.0e-05;
+	public static final double XTICSIZE = 0.005; /* % ymax-ymin */
+	public static final double YTICSIZE = 0.005; /* % xmax-xmin */
+	public static final double XLABSIZE = 0.010;
+	public static final double YLABSIZE = 0.010;
+	public static final double LN10 = 2.30258509;
+
+	public static final double ASSUMEDZERO = 1.0e-10;
+
+
+}

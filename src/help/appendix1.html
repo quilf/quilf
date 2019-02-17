@@ -1,0 +1,318 @@
+<html>
+<head>
+<title>QUILF - APPENDIX 1: Listing of QUILF.RCT</title>
+</head>
+<body>
+<h2><a name="appendix1">APPENDIX 1: Listing of QUILF.RCT</a></h2>
+<listing>
+; Qtz+Usp+IL+Fa+Px+Iron+Qtz+Rutile+Titanite
+;
+; Format of a reaction, assumes a balanced reaction
+;
+; 'ReactionName'; reactant1 + reactant2 = product1 + product2
+;
+; The ReactionName is in quotes, followed by a semicolon
+; if the coefficent of the reactant or product is not one, preceed the
+; name of the component with the coefficent.
+; 
+; Lines beginning with a semicolon are comments.
+;
+; This is a fairly complete list, if you make any changes, instead of deleting
+; the line, just put a semicolon at the beginning of the line.
+;
+; 2 oxides
+;
+'FeTi';			Fe3O4 + FeTiO3 = Fe2TiO4 + Fe2O3
+'MH';			4Fe3O4 + O2 = 6Fe2O3
+'FeMgIlSp';		MgFe2O4 + FeTiO3 = Fe3O4 + MgTiO3
+'FeMnIlSp';		MnFe2O4 + FeTiO3 = Fe3O4 + MnTiO3
+;'FeMgOxide';		Mg2TiO4 + 2FeTiO3 = 2MgTiO3 + Fe2TiO4
+;
+; silicate + oxide
+;
+'FeMgOlIl';		oFe2SiO4 + 2MgTiO3 = oMg2SiO4 + 2FeTiO3
+'FeMgAugIl';		aFe2Si2O6 + 2MgTiO3 = aMg2Si2O6 + 2FeTiO3
+;'FeMgCaAugIl';	aCaFeSi2O6 + MgTiO3 = aCaMgSi2O6 + FeTiO3
+'FeMgPigIl';		pFe2Si2O6 + 2MgTiO3 = pMg2Si2O6 + 2FeTiO3
+'FeMgOpxIl';		oFe2Si2O6 + 2MgTiO3 = oMg2Si2O6 + 2FeTiO3
+;'FeMgCaOpxIl';	oCaFeSi2O6 + MgTiO3 = oCaMgSi2O6 + FeTiO3
+'FeMgOlSp';		oFe2SiO4 + 2MgFe2O4 = oMg2SiO4 + 2Fe3O4
+'FeMgOpxSp';		oFe2Si2O6 + 2MgFe2O4 = oMg2Si2O6 + 2Fe3O4
+'FeMgAugSp';		aFe2Si2O6 + 2MgFe2O4 = aMg2Si2O6 + 2Fe3O4
+'FeMgPigSp';		pFe2Si2O6 + 2MgFe2O4 = pMg2Si2O6 + 2Fe3O4
+;
+; olivine + pyroxene
+;
+'FeMgOlAug';		oMg2SiO4 + aFe2Si2O6  = oFe2SiO4 + aMg2Si2O6
+'FeCaOlAug';		oFe2SiO4 + aCaFeSi2O6 = oCaFeSiO4 + aFe2Si2O6
+;'FeMgCaOlAug';	oCaMgSiO4 + aCaFeSi2O6 = oCaFeSiO4 + aCaMgSi2O6
+'MgCaOlAug';		oMg2SiO4 + aCaMgSi2O6 = oCaMgSiO4 + aMg2Si2O6
+'FeMgOlPig';		oMg2SiO4 + pFe2Si2O6 = oFe2SiO4 + pMg2Si2O6
+'FeCaOlPig';		oFe2SiO4 + pCaFeSi2O6 = oCaFeSiO4 + pFe2Si2O6
+;'FeMgCaOlPig';	oCaMgSiO4 + pCaFeSi2O6 = oCaFeSiO4 + pCaMgSi2O6
+'MgCaOlPig';		oMg2SiO4 + pCaMgSi2O6 = oCaMgSiO4 + pMg2Si2O6
+'FeMgOlOpx';		oMg2SiO4 + oFe2Si2O6 = oFe2SiO4 + oMg2Si2O6
+'FeCaOlOpx';		oFe2SiO4 + oCaFeSi2O6 = oCaFeSiO4 + oFe2Si2O6
+;'FeMgCaOlOpx';	oCaMgSiO4 + oCaFeSi2O6 = oCaFeSiO4 + oCaMgSi2O6
+'MgCaOlOpx';		oMg2SiO4 + oCaMgSi2O6 = oCaMgSiO4 + oMg2Si2O6
+;
+; 2 pyroxenes
+;
+'EnAugPig';		aMg2Si2O6 = pMg2Si2O6
+'FsAugPig';		aFe2Si2O6 = pFe2Si2O6
+'DiAugPig';		aCaMgSi2O6 = pCaMgSi2O6
+'HdAugPig';		aCaFeSi2O6 = pCaFeSi2O6
+'EnAugOpx';		aMg2Si2O6 = oMg2Si2O6
+'FsAugOpx';		aFe2Si2O6 = oFe2Si2O6
+'DiAugOpx';		aCaMgSi2O6 = oCaMgSi2O6
+'HdAugOpx';		aCaFeSi2O6 = oCaFeSi2O6
+'EnPigOpx';		pMg2Si2O6 = oMg2Si2O6
+'FsPigOpx';		pFe2Si2O6 = oFe2Si2O6
+'DiPigOpx';		pCaMgSi2O6 = oCaMgSi2O6
+'HdPigOpx';		pCaFeSi2O6 = oCaFeSi2O6
+;
+; olivine + pyroxene + quartz 
+;
+'MgOlQAug';		aMg2Si2O6 = oMg2SiO4 + SiO2
+'FeOlQAug';		aFe2Si2O6 = oFe2SiO4 + SiO2
+;'CaMgOlQAug';		aCaMgSi2O6 = oCaMgSiO4 + SiO2
+;'CaFeOlQAug';		aCaFeSi2O6 = oCaFeSiO4 + SiO2
+'MgOlQPig';		pMg2Si2O6 = oMg2SiO4 + SiO2
+'FeOlQPig';		pFe2Si2O6 = oFe2SiO4 + SiO2
+;'CaMgOlQPig';		pCaMgSi2O6 = oCaMgSiO4 + SiO2
+;'CaFeOlQPig';		pCaFeSi2O6 = oCaFeSiO4 + SiO2
+'MgOlQOpx';		oMg2Si2O6 = oMg2SiO4 + SiO2
+'FeOlQOpx';		oFe2Si2O6 = oFe2SiO4 + SiO2
+;'CaMgOlQOpx';		oCaMgSi2O6 = oCaMgSiO4 + SiO2
+;'CaFeOlQOpx';		oCaFeSi2O6 = oCaFeSiO4 + SiO2
+;
+; oxide + silicate + quartz
+;
+'FMQ';			3oFe2SiO4 + O2 = 2Fe3O4 + 3SiO2
+'AMQ';			3aFe2Si2O6 + O2 = 2Fe3O4 + 6SiO2
+'PMQ';			3pFe2Si2O6 + O2 = 2Fe3O4 + 6SiO2
+'OMQ';			3oFe2Si2O6 + O2 = 2Fe3O4 + 6SiO2
+'FHQ';			2oFe2SiO4 + O2 = 2Fe2O3 + 2SiO2
+'AHQ';			2aFe2Si2O6 + O2 = 2Fe2O3 + 4SiO2
+'PHQ';			2pFe2Si2O6 + O2 = 2Fe2O3 + 4SiO2
+'OHQ';			2oFe2Si2O6 + O2 = 2Fe2O3 + 4SiO2
+;
+; oxide + olivine + pyroxene
+;
+'FAM';			6oFe2SiO4 + O2 = 2Fe3O4 + 3aFe2Si2O6
+'FPM';			6oFe2SiO4 + O2 = 2Fe3O4 + 3pFe2Si2O6
+'FOM';			6oFe2SiO4 + O2 = 2Fe3O4 + 3oFe2Si2O6
+'FAH';			4oFe2SiO4 + O2 = 2Fe2O3 + 2aFe2Si2O6
+'FPH';			4oFe2SiO4 + O2 = 2Fe2O3 + 2pFe2Si2O6
+'FOH';			4oFe2SiO4 + O2 = 2Fe2O3 + 2oFe2Si2O6
+;
+; 2 oxides + silicate + quartz
+;
+'DFMQ';			oFe2SiO4 + 2Fe2O3 = 2Fe3O4 + SiO2
+'DAMQ';			aFe2Si2O6 + 2Fe2O3 = 2Fe3O4 + 2SiO2
+'DPMQ';			pFe2Si2O6 + 2Fe2O3 = 2Fe3O4 + 2SiO2
+'DOMQ';			oFe2Si2O6 + 2Fe2O3 = 2Fe3O4 + 2SiO2
+;
+; 2 oxides + olivine + pyroxene
+;
+'DFAM';			2oFe2SiO4 + 2Fe2O3 = 2Fe3O4 + aFe2Si2O6
+'DFPM';			2oFe2SiO4 + 2Fe2O3 = 2Fe3O4 + pFe2Si2O6
+'DFOM';			2oFe2SiO4 + 2Fe2O3 = 2Fe3O4 + oFe2Si2O6
+;
+; 2 oxides + rutile
+;
+'SpIlRut';		TiO2 + Fe2TiO4 = 2FeTiO3
+;
+; 2 oxides + iron
+;
+'SpIlFe';			2FeTiO3 + 2Fe + O2 = 2Fe2TiO4
+;
+; oxide + iron + rutile
+;
+'IlFeRut';		2Fe + 2TiO2 + O2 = 2FeTiO3
+'SpFeRut';		2Fe + TiO2 + O2 = Fe2TiO4
+;
+; silicate + iron + quartz
+;
+'OlFeQtz';		2Fe + SiO2 + O2 = oFe2SiO4
+'AugFeQtz';		2Fe + 2SiO2 + O2 = aFe2Si2O6
+'PigFeQtz';		2Fe + 2SiO2 + O2 = pFe2Si2O6
+'OpxFeQtz';		2Fe + 2SiO2 + O2 = oFe2Si2O6
+;
+; titanite + wo + rutile
+;'SpAQtz';		2CaTiSiO5 = aCa2Si2O6 + 2TiO2
+;'SpPQtz';		2CaTiSiO5 = pCa2Si2O6 + 2TiO2
+;'SpOQtz';		2CaTiSiO5 = oCa2Si2O6 + 2TiO2
+;
+; Titanite + iron + olivine + pyroxene + ilmenite + spinel
+;
+'KsIlTnFeQz';	oCaFeSiO4 + FeTiO3 = CaTiSiO5 + 2Fe + O2
+'KsUsTnFeQz';	2oCaFeSiO4 + 2Fe2TiO4 = 2CaTiSiO5 + 6Fe + 3O2
+'aHdIlTnFeQz';		aCaFeSi2O6 + FeTiO3 = CaTiSiO5 + 2Fe + SiO2 + O2
+'pHdIlTnFeQz';		pCaFeSi2O6 + FeTiO3 = CaTiSiO5 + 2Fe + SiO2 + O2
+'oHdIlTnFeQz';		oCaFeSi2O6 + FeTiO3 = CaTiSiO5 + 2Fe + SiO2 + O2
+'aHdUsTnFeQz';	2aCaFeSi2O6 + 2Fe2TiO4 = 2CaTiSiO5 + 6Fe + 2SiO2 + 3O2 
+'pHdUsTnFeQz';	2pCaFeSi2O6 + 2Fe2TiO4 = 2CaTiSiO5 + 6Fe + 2SiO2 + 3O2 
+'oHdUsTnFeQz';	2oCaFeSi2O6 + 2Fe2TiO4 = 2CaTiSiO5 + 6Fe + 2SiO2 + 3O2 
+;
+; Titanite + olivine + pyroxene + ilmenite
+;
+'aHdIlTnFa';	aCaFeSi2O6 + FeTiO3 = CaTiSiO5 + oFe2SiO4
+'pHdIlTnFa';	pCaFeSi2O6 + FeTiO3 = CaTiSiO5 + oFe2SiO4
+'oHdIlTnFa';	oCaFeSi2O6 + FeTiO3 = CaTiSiO5 + oFe2SiO4
+'aDiGkTnFo';		aCaMgSi2O6 + MgTiO3 = CaTiSiO5 + oMg2SiO4
+'pDiGkTnFo';		pCaMgSi2O6 + MgTiO3 = CaTiSiO5 + oMg2SiO4
+'oDiGkTnFo';		oCaMgSi2O6 + MgTiO3 = CaTiSiO5 + oMg2SiO4
+;
+; Titanite + olivine + ilmenite + spinel
+;
+'TnMtKsIl';		3CaTiSiO5 + 2Fe3O4 = 3oCaFeSiO4 + 3FeTiO3 + O2
+'TnHmKsUs';		4CaTiSiO5 + 6Fe2O3 = 4oCaFeSiO4 + 4Fe2TiO4 + 3O2
+;
+; Titanite + pyroxene + ilmenite + quartz
+;
+'aHdIlQzTnoFs';	aCaFeSi2O6 + FeTiO3 + SiO2 = CaTiSiO5 + oFe2Si2O6
+'aHdIlQzTnpFs';	aCaFeSi2O6 + FeTiO3 + SiO2 = CaTiSiO5 + pFe2Si2O6
+'pHdIlQzTnoFs';	pCaFeSi2O6 + FeTiO3 + SiO2 = CaTiSiO5 + oFe2Si2O6
+'pHdIlQzTnaFs';	pCaFeSi2O6 + FeTiO3 + SiO2 = CaTiSiO5 + aFe2Si2O6	
+'oHdIlQzTnpFs';	oCaFeSi2O6 + FeTiO3 + SiO2 = CaTiSiO5 + pFe2Si2O6 
+'oHdIlQzTnaFs';	oCaFeSi2O6 + FeTiO3 + SiO2 = CaTiSiO5 + aFe2Si2O6 
+'aDiGkQzTnoEn';		aCaMgSi2O6 + MgTiO3 + SiO2 = CaTiSiO5 + oMg2Si2O6
+'aDiGkQzTnpEn';		aCaMgSi2O6 + MgTiO3 + SiO2 = CaTiSiO5 + pMg2Si2O6 
+'pDiGkQzTnoEn';		pCaMgSi2O6 + MgTiO3 + SiO2 = CaTiSiO5 + oMg2Si2O6
+'pDiGkQzTnaEn';		pCaMgSi2O6 + MgTiO3 + SiO2 = CaTiSiO5 + aMg2Si2O6 
+'oDiGkQzTnpEn';		oCaMgSi2O6 + MgTiO3 + SiO2 = CaTiSiO5 + pMg2Si2O6
+'oDiGkQzTnaEn';		oCaMgSi2O6 + MgTiO3 + SiO2 = CaTiSiO5 + aMg2Si2O6
+;
+; Titanite + olivine + pyroxene + spinel + quartz
+;
+'FaTnaHdUsQz';	3oFe2SiO4 + 2CaTiSiO5 = 2aCaFeSi2O6 + 2Fe2TiO4 + SiO2
+'FaTnpHdUsQz';	3oFe2SiO4 + 2CaTiSiO5 = 2pCaFeSi2O6 + 2Fe2TiO4 + SiO2
+'FaTnoHdUsQz';	3oFe2SiO4 + 2CaTiSiO5 = 2oCaFeSi2O6 + 2Fe2TiO4 + SiO2
+;
+; Titanite + pyroxene + ilmenite + spinel + quartz
+;
+'aHdIlTnMtQz';	3aCaFeSi2O6 + 3FeTiO3 + O2 = 3CaTiSiO5 + 2Fe3O4 + 3SiO2
+'pHdIlTnMtQz';	3pCaFeSi2O6 + 3FeTiO3 + O2 = 3CaTiSiO5 + 2Fe3O4 + 3SiO2
+'oHdIlTnMtQz';	3oCaFeSi2O6 + 3FeTiO3 + O2 = 3CaTiSiO5 + 2Fe3O4 + 3SiO2
+'aHdIlTnUsQz';		2aCaFeSi2O6 + 6FeTiO3 = 2CaTiSiO5 + 4Fe2TiO4 + 2SiO2
+'pHdIlTnUsQz';		2pCaFeSi2O6 + 6FeTiO3 = 2CaTiSiO5 + 4Fe2TiO4 + 2SiO2
+'oHdIlTnUsQz';		2oCaFeSi2O6 + 6FeTiO3 = 2CaTiSiO5 + 4Fe2TiO4 + 2SiO2
+;'aDiGkTnQnQz';	2aCaMgSi2O6 + 6MgTiO3 = 2CaTiSiO5 + 4Mg2TiO4 + 2SiO2
+;'pDiGkTnQnQz';	2pCaMgSi2O6 + 6MgTiO3 = 2CaTiSiO5 + 4Mg2TiO4 + 2SiO2
+;'oDiGkTnQnQz';	2oCaMgSi2O6 + 6MgTiO3 = 2CaTiSiO5 + 4Mg2TiO4 + 2SiO2
+;
+; Titanite + pyroxene + spinel + quartz
+;
+'aHdUsQzTnoFs';		2aCaFeSi2O6 + 2Fe2TiO4 + 4SiO2 = 2CaTiSiO5 + 3oFe2Si2O6
+'aHdUsQzTnpFs';		2aCaFeSi2O6 + 2Fe2TiO4 + 4SiO2 = 2CaTiSiO5 + 3pFe2Si2O6
+'pHdUsQzTnoFs';			2pCaFeSi2O6 + 2Fe2TiO4 + 4SiO2 = 2CaTiSiO5 + 3oFe2Si2O6
+'pHdUsQzTnaFs';			2pCaFeSi2O6 + 2Fe2TiO4 + 4SiO2 = 2CaTiSiO5 + 3aFe2Si2O6
+'oHdUsQzTnpFs';		2oCaFeSi2O6 + 2Fe2TiO4 + 4SiO2 = 2CaTiSiO5 + 3pFe2Si2O6
+'oHdUsQzTnaFs';		2oCaFeSi2O6 + 2Fe2TiO4 + 4SiO2 = 2CaTiSiO5 + 3aFe2Si2O6
+;
+; Titanite + pyroxene + ilmenite + spinel
+;
+'aHdIlTnMtoFs';	6aCaFeSi2O6 + 6FeTiO3 + O2 = 6CaTiSiO5 + 2Fe3O4 + 3oFe2Si2O6
+'aHdIlTnMtpFs';	6aCaFeSi2O6 + 6FeTiO3 + O2 = 6CaTiSiO5 + 2Fe3O4 + 3pFe2Si2O6
+'aHdIlTnUsoFs';		2aCaFeSi2O6 + 4FeTiO3 = 2CaTiSiO5 + 2Fe2TiO4 + oFe2Si2O6
+'aHdIlTnUspFs';		2aCaFeSi2O6 + 4FeTiO3 =2 CaTiSiO5 + 2Fe2TiO4 + pFe2Si2O6
+;'aDiGkTnQnoEn';			2aCaMgSi2O6 + 4MgTiO3 = 2CaTiSiO5 + 2Mg2TiO4 + oMg2Si2O6
+;'aDiGkTnQnpEn';			2aCaMgSi2O6 + 4MgTiO3 = 2CaTiSiO5 + 2Mg2TiO4 + pMg2Si2O6
+'oHdIlTnMtaFs';	6oCaFeSi2O6 + 6FeTiO3 + O2 = 6CaTiSiO5 + 2Fe3O4 + 3aFe2Si2O6
+'oHdIlTnMtpFs';	6oCaFeSi2O6 + 6FeTiO3 + O2 = 6CaTiSiO5 + 2Fe3O4 + 3pFe2Si2O6
+'oHdIlTnUsaFs';		2oCaFeSi2O6 + 4FeTiO3 = 2CaTiSiO5 + 2Fe2TiO4 + aFe2Si2O6
+'oHdIlTnUspFs';		2oCaFeSi2O6 + 4FeTiO3 = 2CaTiSiO5 + 2Fe2TiO4 + pFe2Si2O6
+;'oDiGkTnQnaEn';			2oCaMgSi2O6 + 4MgTiO3 = 2CaTiSiO5 + 2Mg2TiO4 + aMg2Si2O6
+;'oDiGkTnQnpEn';			2oCaMgSi2O6 + 4MgTiO3 = 2CaTiSiO5 + 2Mg2TiO4 + pMg2Si2O6
+'pHdIlTnMtaFs';	6pCaFeSi2O6 + 6FeTiO3 + O2 = 6CaTiSiO5 + 2Fe3O4 + 3aFe2Si2O6
+'pHdIlTnMtoFs';	6pCaFeSi2O6 + 6FeTiO3 + O2 = 6CaTiSiO5 + 2Fe3O4 + 3oFe2Si2O6
+'pHdIlTnUsaFs';		2pCaFeSi2O6 + 4FeTiO3 = 2CaTiSiO5 + 2Fe2TiO4 + aFe2Si2O6
+'pHdIlTnUsoFs';		2pCaFeSi2O6 + 4FeTiO3 = 2CaTiSiO5 + 2Fe2TiO4 + oFe2Si2O6
+;'pDiGkTnQnaEn';			2pCaMgSi2O6 + MgTiO3 = CaTiSiO5 + Mg2TiO4 + aMg2Si2O6
+;'pDiGkTnQnoEn';			2pCaMgSi2O6 + MgTiO3 = CaTiSiO5 + Mg2TiO4 + oMg2Si2O6
+;
+; Titanite + iron + olivine + rutile
+;
+'KsRutTnFe';	2oCaFeSiO4 + 2TiO2 = 2CaTiSiO5 + 2Fe + O2
+;
+; Titanite + iron + quartz + pyroxene + rutile
+;
+'aHdRutTnFeQz';	2aCaFeSi2O6 + 2TiO2 = 2CaTiSiO5 + 2Fe + 2SiO2 + O2
+'pHdRutTnFeQz';	2pCaFeSi2O6 + 2TiO2 = 2CaTiSiO5 + 2Fe + 2SiO2 + O2
+'oHdRutTnFeQz';	2oCaFeSi2O6 + 2TiO2 = 2CaTiSiO5 + 2Fe + 2SiO2 + O2
+;
+; Titanite + olivine + quartz + pyroxene + rutile
+;
+'aDiRutTnFoQz';	2aCaMgSi2O6 + 2TiO2 = 2CaTiSiO5 + oMg2SiO4 + SiO2
+'pDiRutTnFoQz';	2pCaMgSi2O6 + 2TiO2 = 2CaTiSiO5 + oMg2SiO4 + SiO2
+'oDiRutTnFoQz';	2oCaMgSi2O6 + 2TiO2 = 2CaTiSiO5 + oMg2SiO4 + SiO2
+'aHdRutTnFaQz';		2aCaFeSi2O6 + 2TiO2 = 2CaTiSiO5 + oFe2SiO4 + SiO2
+'pHdRutTnFaQz';		2pCaFeSi2O6 + 2TiO2 = 2CaTiSiO5 + oFe2SiO4 + SiO2
+'oHdRutTnFaQz';		2oCaFeSi2O6 + 2TiO2 = 2CaTiSiO5 + oFe2SiO4 + SiO2
+;
+; Titanite + ilmenite + spinel + olivine + rutile
+;
+'MoRutTnGk';	oCaMgSiO4 + 2TiO2 = CaTiSiO5 + MgTiO3
+;MoRutTnQn';	2oCaMgSiO4 + 3TiO2 = 2CaTiSiO5 + Mg2TiO4
+'KsRutTnIl';		oCaFeSiO4 + 2TiO2 = CaTiSiO5 + FeTiO3
+'KsRutTnHm';		4oCaFeSiO4 + 4TiO2 + O2 = 4CaTiSiO5 + 2Fe2O3
+'KsRutTnMt';	6oCaFeSiO4 + 6TiO2 + O2 = 6CaTiSiO5 + 2Fe3O4
+'KsRutTnUs';	2oCaFeSiO4 + 3TiO2 = 2CaTiSiO5 + Fe2TiO4
+;
+; Titanite + olivine + pyroxene + spinel + rutile
+;
+'aHdUsRutFaTn';	2aCaFeSi2O6 + Fe2TiO4 + TiO2 = 2oFe2SiO4 + 2CaTiSiO5
+'pHdUsRutFaTn';	2pCaFeSi2O6 + Fe2TiO4 + TiO2 = 2oFe2SiO4 + 2CaTiSiO5
+'oHdUsRutFaTn';	2oCaFeSi2O6 + Fe2TiO4 + TiO2 = 2oFe2SiO4 + 2CaTiSiO5
+;'aDiQnRutFoTn';		2aCaMgSi2O6 + Mg2TiO4 + TiO2 = 2oMg2SiO4 + 2CaTiSiO5
+;'pDiQnRutFoTn';		2pCaMgSi2O6 + Mg2TiO4 + TiO2 = 2oMg2SiO4 + 2CaTiSiO5
+;'oDiQnRutFoTn';		2oCaMgSi2O6 + Mg2TiO4 + TiO2 = 2oMg2SiO4 + 2CaTiSiO5
+;
+; Titanite + spinel + quartz + pyroxene + rutile
+;
+'aHdRutTnMtQz';	6aCaFeSi2O6 + 6TiO2 + O2 = 6CaTiSiO5 + 2Fe3O4 + 6SiO2
+'pHdRutTnMtQz';	6pCaFeSi2O6 + 6TiO2 + O2 = 6CaTiSiO5 + 2Fe3O4 + 6SiO2
+'oHdRutTnMtQz';	6oCaFeSi2O6 + 6TiO2 + O2 = 6CaTiSiO5 + 2Fe3O4 + 6SiO2
+'aHdRutTnUsQz';		2aCaFeSi2O6 + 3TiO2 = 2CaTiSiO5 + Fe2TiO4 + 2SiO2
+'pHdRutTnUsQz';		2pCaFeSi2O6 + 3TiO2 = 2CaTiSiO5 + Fe2TiO4 + 2SiO2
+'pHdRutTnUsQz';		2oCaFeSi2O6 + 3TiO2 = 2CaTiSiO5 + Fe2TiO4 + 2SiO2
+;
+; Titanite + ilmenite + quartz + pyroxene + rutile
+;
+'aHdRutTnIlQz';	2aCaFeSi2O6 + 4TiO2 = 2CaTiSiO5 + 2FeTiO3 + 2SiO2
+'pHdRutTnIlQz';	2pCaFeSi2O6 + 4TiO2 = 2CaTiSiO5 + 2FeTiO3 + 2SiO2
+'oHdRutTnIlQz';	2oCaFeSi2O6 + 4TiO2 = 2CaTiSiO5 + 2FeTiO3 + 2SiO2
+'aDiRutTnGkQz';		2aCaMgSi2O6 + 4TiO2 = 2CaTiSiO5 + 2MgTiO3 + 2SiO2
+'pDiRutTnGkQz';		2pCaMgSi2O6 + 4TiO2 = 2CaTiSiO5 + 2MgTiO3 + 2SiO2
+'oDiRutTnGkQz';		2oCaMgSi2O6 + 4TiO2 = 2CaTiSiO5 + 2MgTiO3 + 2SiO2
+;
+;Titanite + pyroxene + rutile
+;
+'aDiRutTnoEn';	2aCaMgSi2O6 + 2TiO2 = 2CaTiSiO5 + oMg2Si2O6
+'aDiRutTnpEn';	2aCaMgSi2O6 + 2TiO2 = 2CaTiSiO5 + pMg2Si2O6
+'aHdRutTnoFs';		2aCaFeSi2O6 + 2TiO2 = 2CaTiSiO5 + oFe2Si2O6
+'aHdRutTnpFs';		2aCaFeSi2O6 + 2TiO2 = 2CaTiSiO5 + pFe2Si2O6
+'pDiRutTnaEn';	2pCaMgSi2O6 + 2TiO2 = 2CaTiSiO5 + aMg2Si2O6
+'pDiRutTnoEn';	2pCaMgSi2O6 + 2TiO2 = 2CaTiSiO5 + oMg2Si2O6
+'pHdRutTnaFs';		2pCaFeSi2O6 + 2TiO2 = 2CaTiSiO5 + aFe2Si2O6
+'pHdRutTnoFs';		2pCaFeSi2O6 + 2TiO2 = 2CaTiSiO5 + oFe2Si2O6
+'oDiRutTnpEn';	2oCaMgSi2O6 + 2TiO2 = 2CaTiSiO5 + pMg2Si2O6
+'oDiRutTnaEn';	2oCaMgSi2O6 + 2TiO2 = 2CaTiSiO5 + aMg2Si2O6
+'oHdRutTnpFs';		2oCaFeSi2O6 + 2TiO2 = 2CaTiSiO5 + pFe2Si2O6
+'oHdRutTnaHd';		2oCaFeSi2O6 + 2TiO2 = 2CaTiSiO5 + aFe2Si2O6
+;
+; karooite reactions
+;
+'GkRutKar';	MgTiO3 + TiO2 = MgTi2O5
+</listing>
+
+<p>Notes:  In the abbreviations of the left column, Fe, Mg, Ca, Ti are cations; Ol, Opx, Aug, Pig are Ca-Mg-Fe olivine, orthopyroxene, augite, and pigeonite; Sp and Il are Fe-Mg-Mn-Ti spinel (Ti-magnetite) and ilmenite.  In redox and displaced (D) equilibria, F is fayalite end-member; O, P, and A refer to Fe<sub>2</sub>Si<sub>2</sub>O<sub>6</sub> component in orthopyroxene, pigeonite, and augite, respectively.  Q and Rut are quartz and rutile or the equivalent components; M and H refer to Fe3O<sub>4</sub> and Fe<sub>2</sub>O<sub>3</sub> components in spinel and ilmenite, respectively.  En, Fs, Di, and Hd are the pyroxene end-members Mg<sub>2</sub>Si<sub>2</sub>O<sub>6</sub>, Fe<sub>2</sub>Si<sub>2</sub>O<sub>6</sub>, CaMgSi<sub>2</sub>O<sub>6</sub>, and CaFeSi<sub>2</sub>O<sub>6</sub>.  Fe is metallic iron or its component.</p>
+
+<p>In the formulas, prefix o for an olivine formula [M2SiO<sub>4</sub>] indicates olivine; prefixes o, a, p before pyroxene end member formulas indicate that component in Opx, augite, or pigeonite, respectively.  Fe<sub>2</sub>O<sub>3</sub>, FeTiO<sub>3</sub>, and MgTiO<sub>3</sub> are components of ilmenite; Fe3O<sub>4</sub>, Fe<sub>2</sub>TiO<sub>4</sub>, and MgFe<sub>2</sub>O<sub>4</sub> are components of spinel (Ti-magnetite). <p>
+
+<p>The 11 reactions or equilibria preceded by ; are redundant and thus ignored by the program; they are listed here for completeness.</p>
+
+
+</body>
+</html>
